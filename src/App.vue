@@ -27,14 +27,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    
     </v-app-bar>
 
     <v-main>
@@ -53,24 +46,16 @@
       >
         <v-card-text>
           <v-btn
-            :key="icon"
-            class="mx-4 white--text"
-            icon
-          >
-            <v-icon class="mx-4 white--text" size="24px">mdi-google-hangouts</v-icon>
-          </v-btn>
-
-          <v-btn
-            :key="icon"
-            class="mx-4 white--text"
-            icon
-            href="https//www.github.com/abraham-felix"
-          >
-            <v-icon class="mx-4 white--text" size="24px">mdi-github</v-icon>
-          </v-btn>
-
-
-
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-3"
+          dark
+          icon
+        >
+          <a :href="icon.url" :target="icon.target">
+            <v-icon class="white--text" size="24px">{{ icon.name }}</v-icon>
+          </a>
+        </v-btn>
         </v-card-text>
 
         <v-card-text class="white--text">
@@ -92,7 +77,18 @@ export default {
   },
 
   data: () => ({
-    //
+    icons: [
+      {
+          name:'mdi-google',
+          url: 'https://business.google.com/dashboard/l/18315130497288576188',
+          target: '_blank'
+      },
+      {
+          name:'mdi-github',
+          url: 'https://www.github.com/abraham-felix',
+          target: '_blank'
+      },
+    ]
   }),
 };
 </script>
