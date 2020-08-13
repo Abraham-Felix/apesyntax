@@ -7,21 +7,21 @@
     >
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+          alt="Apesyntax logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="https://celfonica.s3-us-west-1.amazonaws.com/logos/apesyntax+logo.png"
           transition="scale-transition"
           width="40"
         />
 
         <v-img
-          alt="Vuetify Name"
+          alt="Apesyntax Name"
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
+          src="https://celfonica.s3-us-west-1.amazonaws.com/logos/Apesyntax+name+white.png"
+          width="200"
         />
       </div>
 
