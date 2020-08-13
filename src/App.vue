@@ -40,6 +40,44 @@
     <v-main>
       <HelloWorld/>
     </v-main>
+    <v-footer
+      dark
+      padless
+    >
+      <v-card
+        flat
+        tile
+        class=" white--text text-center"
+        color="primary"
+        width="100%"
+      >
+        <v-card-text>
+          <v-btn
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+          >
+            <v-icon class="mx-4 white--text" size="24px">mdi-google-hangouts</v-icon>
+          </v-btn>
+
+          <v-btn
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+            href="https//www.github.com/abraham-felix"
+          >
+            <v-icon class="mx-4 white--text" size="24px">mdi-github</v-icon>
+          </v-btn>
+
+
+
+        </v-card-text>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Apesyntax</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-app>
 </template>
 
