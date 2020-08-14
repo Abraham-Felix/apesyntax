@@ -31,14 +31,13 @@
   methods: {
     login: function() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-      function(user) {
-        alert('well done! you are now conected' + user.message)
+      (user) => {
+        this.$router.go('home' +  user.message)
       },
-      function(err) {
+      (err) => {
         alert('Oops.' + err.message)
       }
     );
-        this.$router.replace('home');
     }
    }
   }

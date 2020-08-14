@@ -27,8 +27,6 @@
           />
         </div>
 
-        <button @click="logout">Logout</button>
-
         <v-spacer></v-spacer>
         <router-link to="/home">Home</router-link> |
         <router-link to="/about">About</router-link>
@@ -79,18 +77,10 @@
 </template>
 <script>
 
-import firebase from 'firebase';
 
 
 export default {
   name: 'home',
-  methods: {
-    logout: function() {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
-      })
-    }
-  },
 data: () => ({
   icons: [
     {
