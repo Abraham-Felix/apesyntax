@@ -5,9 +5,9 @@
  <h3> Sign up </h3>
  <br>
  <p>Let's create a new account!</p>
-   <input type="text" placeholder="Email"><br>
-   <input type="password" placeholder="Password"><br>
-   <button>sign up</button>
+   <input type="text" v-model="email" placeholder="Email"><br>
+   <input type="password" v-model="password" placeholder="Password"><br>
+   <button @click="signUp">sign up</button>
    <span>or go back to <router-link to="/login">login</router-link>.</span>
   </div>
   </v-card>
@@ -15,14 +15,32 @@
 </template>
 
 <script>
+
+import firebase from 'firebase';
+
   export default {
     name:  'signUp',
     data() {
-      return {}
+      return {
+        email: '',
+        password: ''
+      }
     },
-    methods: {}
+    methods: {
+      signUp: function() {
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+        function (user) {
+          alert('Your account has been created !' + user.message)
+        },
+        function (err) {
+          alert('Oops.' + err.message)
+        }
+      );
+    }
   }
-  </script>
+}
+
+</script>
 
   <style scoped>
   .v-card {

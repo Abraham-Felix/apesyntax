@@ -27,13 +27,15 @@
           />
         </div>
 
+        <button @click="logout">Logout</button>
+
         <v-spacer></v-spacer>
-        <router-link to="/">Home</router-link> |
+        <router-link to="/home">Home</router-link> |
         <router-link to="/about">About</router-link>
 
 
         </v-app-bar>
-      </div> 
+      </div>
 
      <!-- body -->
       <div id="body">
@@ -77,7 +79,18 @@
 </template>
 <script>
 
+import firebase from 'firebase';
+
+
 export default {
+  name: 'home',
+  methods: {
+    logout: function() {
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login')
+      })
+    }
+  },
 data: () => ({
   icons: [
     {
@@ -94,6 +107,7 @@ data: () => ({
 })
 }
 </script>
+
 
 <style lang="scss">
 #app {

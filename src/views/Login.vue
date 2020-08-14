@@ -5,8 +5,8 @@
     <h3>Sign In</h3>
     <br>
     <p>Welcome, sign in!</p>
-    <input type="text" placeholder="Email"><br>
-    <input type="password" placeholder="Password"><br>
+    <input type="text" v-model="email" placeholder="Email"><br>
+    <input type="password" v-model="password" placeholder="Password"><br>
     <button @click="login">Connection</button>
     <p>You don't have an account? you can <router-link to="/sign-up">create one.</router-link></p>
     </div>
@@ -14,14 +14,30 @@
 </body>
 </template>
 
+
+
 <script>
+
+  import firebase from 'firebase';
+
   export default {
   name: 'login',
   data() {
-    return {};
+    return {
+      email: '',
+      password: ''
+    }
   },
   methods: {
     login: function() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+      function(user) {
+        alert('well done! you are now conected' + user.message)
+      },
+      function(err) {
+        alert('Oops.' + err.message)
+      }
+    );
         this.$router.replace('home');
     }
    }
