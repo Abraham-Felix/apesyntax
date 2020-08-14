@@ -1,11 +1,15 @@
 <template>
-<div class="login">
-  <h3>Sign In</h3>
+  <body>
+  <v-card>
+   <div class="login">
+    <h3>Sign In</h3>
     <input type="text" placeholder="Email"><br>
     <input type="password" placeholder="Password"><br>
     <button>Connection</button>
     <p>You don't have an account? you can create one.</p>
     </div>
+  </v-card>
+</body>
 </template>
 
 <script>
