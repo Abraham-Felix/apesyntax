@@ -1,3 +1,31 @@
+/*elements-classes*/
 body {
-  min-height: 500px;
+    max-height: 900px;
+    height: fit-content;
+    position: relative;
+    display: table;
+    width: -webkit-fill-available;
+}
+input {
+   border-radius: 0;
+   border: #80808014 solid 1px !important;
+   margin: 5px;
+}
+/*css-classes*/
+.center{
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: -webkit-inline-box !important;
+}
+/*ID-classes*/
+#nav a {
+    font-weight: bold;
+    color: #eef6fe ;
+}
+#nav a:visited {
+    font-weight: bold;
+    color: #ffffff ;
+}
+#nav a.router-link-exact-active {
+    color: #2ee5ff !important;
 }

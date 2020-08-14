@@ -1,5 +1,5 @@
 <template>
-<div class="about">
+<body>
 <v-card
    class="mx-auto"
    max-width="344"
@@ -19,7 +19,7 @@
     so <span class="bold">hang</span> on tight this could be quite a journey!  </p>
   </v-card-text>
   </v-card>
-  </div>
+  </body>
 </template>
 
 
@@ -33,18 +33,11 @@
   .v-card{
     display:inline-block;
   }
-  .center{
-    margin-left: auto !important;
-    margin-right: auto !important;
-    display: -webkit-inline-box !important;
-  }
   .margin {
     margin:10px !important;
   }
-  .about {
-   min-height: 900px;
-  }
   .mx-auto {
    margin-top: 10vw;
+   margin-bottom: 10vw;
   }
 </style>

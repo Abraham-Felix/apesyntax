@@ -1,6 +1,6 @@
 <template>
 <v-app>
-  <!-- navbar -->
+/*   <!-- navbar -->
     <div id="nav">
       <v-app-bar
         app
@@ -33,7 +33,7 @@
 
 
         </v-app-bar>
-      </div>
+      </div> 
 
      <!-- body -->
       <div id="body">
