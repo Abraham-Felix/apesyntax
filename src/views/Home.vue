@@ -6,7 +6,7 @@
       <v-col cols="12">
         <v-img
           :src="require('../assets/apesyntaxlogo.png')"
-          class="my-3"
+          class="my-10"
           contain
           height="200"
         />
@@ -38,9 +38,6 @@ export default {
   }
 }
 </script>
+<style scoped>
 
-<style lang="scss">
-  #body {
-      heigth: 800px;
-  }
 </style>

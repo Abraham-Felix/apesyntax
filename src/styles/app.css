@@ -1,7 +1,6 @@
 /*elements-classes*/
-body {
-    max-height: 900px;
-    height: fit-content;
+main  {
+    height: 700px !important;
     position: relative;
     display: table;
     width: -webkit-fill-available;
@@ -12,6 +11,9 @@ input {
    margin: 5px;
 }
 /*css-classes*/
+.my-3 {
+  margin-top:10vw !important;
+}
 .center{
   margin-left: auto !important;
   margin-right: auto !important;
