@@ -1,4 +1,7 @@
 /*elements-classes*/
+html  {
+  overflow: auto;
+}
 main  {
     height: 700px !important;
     position: relative;
