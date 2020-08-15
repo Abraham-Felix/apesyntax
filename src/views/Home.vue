@@ -1,7 +1,7 @@
 <template>
   <div class="home">
   <v-container>
-    <button @click="logout">Logout</button>
+    <v-btn @click="logout">Logout</v-btn>
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -39,8 +39,8 @@ export default {
 }
 </script>
 
-<style scoped>
-  .body {
-    heigth:600px;
+<style lang="scss">
+  #body {
+      heigth: 800px;
   }
 </style>

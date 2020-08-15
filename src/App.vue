@@ -1,5 +1,9 @@
 <template>
+
 <v-app>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 /*   <!-- navbar -->
     <div id="nav">
       <v-app-bar
@@ -7,7 +11,7 @@
         color="primary"
         dark
       >
-        <div class="d-flex align-center">
+        <div class="d-flex align-center nav-col-left">
           <v-img
             alt="Apesyntax logo"
             class="shrink mr-2"
@@ -26,10 +30,20 @@
             width="200"
           />
         </div>
+        <div class="nav-col-mid">
+        <router-link to="/home">
+        <v-btn depressed small color="primary">Home</v-btn>
+        </router-link>
+        <router-link to="/about">
+        <v-btn depressed small color="primary">About</v-btn>
+        </router-link>
+        </div>
+        <div class="nav-col-right">
+        </div>
 
         <v-spacer></v-spacer>
-        <router-link to="/home">Home</router-link> |
-        <router-link to="/about">About</router-link>
+
+
 
 
         </v-app-bar>
@@ -120,4 +134,11 @@ data: () => ({
     }
   }
 }
+.nav-col-mid {
+  width:60%;
+}
+.nav-col-left, .nav-col-right {
+  width:20%;
+}
+
 </style>
