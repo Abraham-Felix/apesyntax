@@ -4,7 +4,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-/*   <!-- navbar -->
+  <!-- navbar -->
     <div id="nav">
       <v-app-bar
         app
@@ -36,6 +36,9 @@
         </router-link>
         <router-link to="/about">
         <v-btn depressed small color="primary">About</v-btn>
+        </router-link>
+        <router-link to="/contact">
+        <v-btn depressed small color="primary">Contact</v-btn>
         </router-link>
         </div>
         <div class="nav-col-right">

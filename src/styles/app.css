@@ -11,8 +11,8 @@ main  {
 input {
    border-radius: 0;
    border: #80808014 solid 1px !important;
-   margin: 5px;
 }
+
 /*css-classes*/
 .my-3 {
   margin-top:10vw !important;
@@ -21,6 +21,12 @@ input {
   margin-left: auto !important;
   margin-right: auto !important;
   display: -webkit-inline-box !important;
+}
+.v-text-field input {
+    flex: 1 1 auto !important;
+  }
+  .v-select.v-text-field input {
+    position: absolute;
 }
 /*ID-classes*/
 #nav a {
