@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Apesyntax Experiments</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+
+    </div>
+    <div class="company-info">
+      <h3>Apesyntax - front end dev</h3>
+      <ul>
+        <li><i class="fa fa-road"></i> 44 Something st</li>
+        <li><i class="fa fa-phone"></i> (555) 555-5555</li>
+        <li><i class="fa fa-envelope"></i> test@acme.test</li>
+      </ul>
+    </div>
+    <div class="contact">
+      <h3>Email Us</h3>
+      <div class="alert">Your message has been sent</div>
+      <form id="contactForm">
+        <p>
+          <label>Name</label>
+          <input type="text" name="name" id="name" required>
+        </p>
+        <p>
+          <label>Company</label>
+          <input type="text" name="company" id="company">
+        </p>
+        <p>
+          <label>Email Address</label>
+          <input type="email" name="email" id="email" required>
+        </p>
+        <p>
+          <label>Phone Number</label>
+          <input type="text" name="phone" id="phone">
+        </p>
+        <p class="full">
+          <label>Message</label>
+          <textarea name="message" rows="5" id="message"></textarea>
+        </p>
+        <p class="full">
+          <button type="submit">Submit</button>
+        </p>
+      </form>
+    </div>
+
+
     <!-- built files will be auto injected -->
   </body>
 </html>

@@ -1,135 +1,11 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    method="POST"
-    lazy-validation
-    @submit="saveContactMessage"
-  >
-    <v-text-field
-      v-model="name"
-      :counter="10"
-      :rules="nameRules"
-      label="Name"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      color="light-blue accent-4"
-      label="E-mail"
-      required
-    ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[v => !!v || 'Type is required']"
-      color="light-blue accent-4"
-      label="Type"
-      required
-    ></v-select>
-
-    <v-textarea
-        v-model="message"
-        auto-grow
-        filled
-        color="light-blue accent-4"
-        label="Message"
-        rows="1"
-      ></v-textarea>
-
-    <v-checkbox
-      v-model="checkbox"
-      :rules="[v => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
-      required
-    ></v-checkbox>
-
-    <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      @click="validate"
-    >
-      Validate
-    </v-btn>
-
-    <v-btn
-      color="error"
-      class="mr-4"
-      @click="reset"
-    >
-      Reset Form
-    </v-btn>
-
-    <v-btn
-      color="warning"
-      @click="resetValidation"
-    >
-      Reset Validation
-    </v-btn>
-  </v-form>
+  <p>ok</p>
 </template>
 <script>
 
 
 export default {
   name: 'contactform',
-  data: () => ({
-    /* data model for form */
-      message: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
-      valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      select: null,
-      items: [
-        'Feed Back',
-        'Other',
-      ],
-      checkbox: false,
-    }),
-
-    methods: {
-      validate () {
-        this.$refs.form.validate()
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
-      /* This method will send data to firebase db */
-      saveContactMessage: function (e) {
-        e.preventDefault()
-        const messagesRef = this.$firebaseDatabase.collection('message')
-        messagesRef.add(
-          {
-            name: this.name,
-            select: this.select,
-            email: this.email,
-            message: this.message,
-            time: new Date(),
-          },
-        )
-        this.name= ''
-        this.email = ''
-        this.message = ''
-        this.select = ''
-        this.submitted = true
-        this.snackbar = false
-      },
-    },
 }
 
 </script>
@@ -137,5 +13,117 @@ export default {
 <style scoped>
 input {
   margin: 0px !important;
+}
+*{
+  box-sizing: border-box;
+}
+
+body{
+  color:#485e74;
+  line-height:1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding:1em;
+}
+
+.container{
+  max-width:1170px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:1em;
+}
+
+ul{
+  list-style: none;
+  padding:0;
+}
+
+.brand{
+  text-align: center;
+}
+
+.brand span{
+  color:#fff;
+}
+
+.wrapper{
+  box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
+}
+
+.wrapper > *{
+  padding: 1em;
+}
+
+.company-info{
+  background:#c9e6ff;
+  padding: 20px;
+}
+
+.company-info h3, .company-info ul{
+  text-align: center;
+  margin:0 0 1rem 0;
+}
+
+
+/* FORM STYLES */
+.contact form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:20px;
+}
+
+.contact form label{
+  display:block;
+}
+
+.contact form p{
+  margin:0;
+}
+
+.contact form .full{
+  grid-column: 1 / 3;
+}
+
+.contact form button, .contact form input, .contact form textarea{
+  width:100%;
+  padding:1em;
+  border:1px solid #c9e6ff;
+}
+
+.contact form button{
+  background:#c9e6ff;
+  border:0;
+  text-transform: uppercase;
+}
+
+.contact form button:hover,.contact form button:focus{
+  background:#92bde7;
+  color:#fff;
+  outline:0;
+  transition: background-color 2s ease-out;
+}
+
+.alert{
+  text-align: center;
+  padding:10px;
+  background:#79c879;
+  color:#fff;
+  margin-bottom:10px;
+  display:none;
+}
+
+/* LARGE SCREENS */
+@media(min-width:700px){
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .wrapper > *{
+    padding:2em;
+  }
+
+  .company-info h3, .company-info ul, .brand{
+    text-align: left;
+  }
 }
 </style>
