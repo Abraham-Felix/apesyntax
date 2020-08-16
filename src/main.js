@@ -7,6 +7,7 @@ import router from './router';
 
 import './styles/app.css';
 
+require('firebase/firestore')
 Vue.config.productionTip = false;
 
 let app = '';
