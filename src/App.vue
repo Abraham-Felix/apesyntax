@@ -86,7 +86,7 @@
         </v-card-text>
 
         <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Apesyntax</strong>
+          {{ new Date().getFullYear() }} — <strong>Apesyntax | Vue.js </strong>
         </v-card-text>
 
     </v-footer>
