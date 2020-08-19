@@ -55,6 +55,7 @@
      <!-- body -->
       <div id="body">
         <main>
+
           <router-view/>
         </main>
      </div>
@@ -93,7 +94,6 @@
   </v-app>
 </template>
 <script>
-
 
 
 export default {

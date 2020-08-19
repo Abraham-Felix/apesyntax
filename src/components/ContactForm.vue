@@ -1,129 +1,89 @@
 <template>
-  <p>ok</p>
+ <div id="app" class="contactForm">
+   <div class="page-header">
+       </div>
+       <div class="panel panel-default">
+         <div class="panel-heading">
+           <h2 class="panel-title">write something cool...</h2>
+           <p> maybe... </p>
+         </div>
+         <div class="panel-body">
+            <form id="form" class="form-inline" v-on:submit.prevent="addMessage">
+             <div class="form-group">
+                <v-text-field required label="Name" type="text" id="messageName" class="form-control" v-model="newMessage.name">
+                 </v-text-field>
+             </div>
+             <div class="form-group">
+               <v-text-field :rules="emailRules" required label="email" type="text" id="messageEmail" class="form-control" v-model="newMessage.email">
+               </v-text-field>
+             </div>
+             <div class="form-group">
+               <v-textarea required label="Message" type="text" id="messageContent" class="form-control" v-model="newMessage.content">
+               </v-textarea>
+             </div>
+             <v-btn type="submit" small color="primary" dark>
+              Push me
+             </v-btn>
+           </form>
+         </div>
+       </div>
+</div>
 </template>
 <script>
 
+  import Firebase from 'firebase'
+
+  import toastr from 'toastr'
+
+  let config = {
+    apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
+    authDomain: "apesyntax.firebaseapp.com",
+    databaseURL: "https://apesyntax.firebaseio.com",
+    projectId: "apesyntax",
+    storageBucket: "apesyntax.appspot.com",
+    messagingSenderId: "970915545858",
+    appId: "1:970915545858:web:e9b093968d646dc8e0781b",
+    measurementId: "G-15YM4ZEF9V"
+  };
+
+let app = Firebase.initializeApp(config)
+
+  let db = app.database()
+
+let messagesRef = db.ref('messages')
 
 export default {
   name: 'contactform',
+
+  firebase: {
+  messages: messagesRef
+},
+
+data () {
+  return {
+    newMessage: {
+        name: '',
+        content: '',
+        email: ''
+    }
+  }
+},
+
+ methods: {
+    addMessage: function () {
+      messagesRef.push(this.newMessage);
+      this.newMessage.name = '';
+      this.newMessage.content = '';
+      this.newMessage.email = '';
+      toastr.success('Horray! message sent successfully')
+    },
+  },
+
 }
 
 </script>
 
 <style scoped>
-input {
-  margin: 0px !important;
-}
-*{
-  box-sizing: border-box;
-}
-
-body{
-  color:#485e74;
-  line-height:1.6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding:1em;
-}
-
-.container{
-  max-width:1170px;
-  margin-left:auto;
-  margin-right:auto;
-  padding:1em;
-}
-
-ul{
-  list-style: none;
-  padding:0;
-}
-
-.brand{
-  text-align: center;
-}
-
-.brand span{
-  color:#fff;
-}
-
-.wrapper{
-  box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
-}
-
-.wrapper > *{
-  padding: 1em;
-}
-
-.company-info{
-  background:#c9e6ff;
-  padding: 20px;
-}
-
-.company-info h3, .company-info ul{
-  text-align: center;
-  margin:0 0 1rem 0;
-}
 
 
-/* FORM STYLES */
-.contact form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap:20px;
-}
-
-.contact form label{
-  display:block;
-}
-
-.contact form p{
-  margin:0;
-}
-
-.contact form .full{
-  grid-column: 1 / 3;
-}
-
-.contact form button, .contact form input, .contact form textarea{
-  width:100%;
-  padding:1em;
-  border:1px solid #c9e6ff;
-}
-
-.contact form button{
-  background:#c9e6ff;
-  border:0;
-  text-transform: uppercase;
-}
-
-.contact form button:hover,.contact form button:focus{
-  background:#92bde7;
-  color:#fff;
-  outline:0;
-  transition: background-color 2s ease-out;
-}
-
-.alert{
-  text-align: center;
-  padding:10px;
-  background:#79c879;
-  color:#fff;
-  margin-bottom:10px;
-  display:none;
-}
-
-/* LARGE SCREENS */
-@media(min-width:700px){
-  .wrapper{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .wrapper > *{
-    padding:2em;
-  }
-
-  .company-info h3, .company-info ul, .brand{
-    text-align: left;
-  }
-}
 </style>
