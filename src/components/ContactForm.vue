@@ -94,6 +94,9 @@ data () {
       this.newMessage.email = '';
       toastr.success('Horray! message sent successfully');
       this.displayText = 'Nice job!';
+      this.nameRules = true;
+      this.emailRules = true;
+      this.contentRules = true;
     },
      markcompleted: function() {
        this.displayText = 'hum.. somthing still missing';
