@@ -1,6 +1,11 @@
 <template>
 
 <v-app>
+<!-- it might need more height in body as content so it works properly -->
+<v-parallax
+    height="100%"
+    src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+  >
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -89,6 +94,7 @@
 
     </v-footer>
   </div>
+  </v-parallax>
   </v-app>
 </template>
 <script>
