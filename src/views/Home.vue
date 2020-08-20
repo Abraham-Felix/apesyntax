@@ -24,6 +24,9 @@
         </h1>
         <p>
          This app runs node.js server and vue.js framework contected to firebase db </p>
+         <h4> - New features coming soon!</h4>
+         <li > Skeleton Loader</li>
+
         </v-card>
         </v-col>
     </v-row>
@@ -39,10 +42,16 @@ export default {
 </script>
 
 <style >
+  li {
+  color: dodgerblue;
+  font-size: 18px;
+  padding: 1vw;
+  }
   .v-card {
     width: 420px;
     margin-left:auto;
     margin-right:auto;
+    padding: 3vw;
   }
   .v-image {
     width:min-content;
