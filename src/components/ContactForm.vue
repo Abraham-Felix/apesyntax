@@ -1,13 +1,10 @@
 <template>
- <div id="app" class="contactForm">
-   <div class="page-header">
-       </div>
-       <div class="panel panel-default">
+ <div id="app" >
          <div class="panel-heading">
            <h2 class="panel-title">write something cool...</h2>
          </div>
-         <div class="panel-body">
-            <form id="form" class="form-inline" v-on:submit.prevent="addMessage">
+         <div>
+            <v-form id="form" class="form-inline" v-on:submit.prevent="addMessage">
              <div class="form-group">
                 <v-text-field :rules="nameRules" required label="First" type="text" id="messageFirst" class="form-control" v-model="newMessage.first">
                  </v-text-field>
@@ -27,10 +24,9 @@
              <v-btn @click="markcompleted" type="submit" small color="primary"  dark>
               {{ displayText }}
              </v-btn>
-           </form>
+           </v-form>
          </div>
        </div>
-</div>
 </template>
 <script>
 

@@ -38,7 +38,7 @@
         <v-btn depressed small color="primary">About</v-btn>
         </router-link>
         <router-link to="/contact">
-        <v-btn depressed small color="primary">Contact</v-btn>
+        <v-btn depressed dark small color="primary">Contact</v-btn>
         </router-link>
 
         </div>
@@ -84,7 +84,7 @@
         </v-card-text>
 
         <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Apesyntax | Vue.js </strong>
+          {{ new Date().getFullYear() }} — <strong>Apesyntax | My School project for Vue.js </strong>
         </v-card-text>
 
     </v-footer>

@@ -36,7 +36,5 @@ input {
 #nav a:visited {
     font-weight: bold;
     color: #ffffff ;
-}
-#nav a.router-link-exact-active {
-    color: #2ee5ff !important;
+    text-decoration: none !important;
 }

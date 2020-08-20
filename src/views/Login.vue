@@ -1,17 +1,20 @@
 <template>
-  <body>
+  <v-form  class="contactForm">
   <v-card class="center">
    <div class="login">
     <h3>Sign In</h3>
     <br>
-    <p>Welcome, sign in!</p>
-    <input type="text" v-model="email" placeholder="Email"><br>
-    <input type="password" v-model="password" placeholder="Password"><br>
-    <button @click="login">Connection</button>
-    <p>You don't have an account? you can <router-link to="/sign-up">create one.</router-link></p>
+    <div class="form-group">
+    <v-text-field class="form-control" type="text" v-model="email" placeholder="Email">
+    </v-text-field>
+    </div>
+    <v-text-field class="form-control" type="password" v-model="password" placeholder="Password">
+    </v-text-field>
+    <v-btn depressed small color="primary" @click="login">conect</v-btn>
+    <p>Or you can <router-link to="/sign-up">create one.</router-link></p>
     </div>
   </v-card>
-</body>
+</v-form>
 </template>
 
 
@@ -49,7 +52,8 @@
    height: 400px;
    padding: 2vh;
    max-width: 600px !important;
-   width: min-content;
+   width: 300px;
+   -webkit-box-pack: center;
  }
  button {
    box-shadow: 0px 0px 3px -2px #b6bbc0 ;

@@ -7,8 +7,8 @@
  <p>Let's create a new account!</p>
    <input type="text" v-model="email" placeholder="Email"><br>
    <input type="password" v-model="password" placeholder="Password"><br>
-   <button @click="signUp">sign up</button>
-   <span>or go back to <router-link to="/login">login</router-link>.</span>
+     <v-btn depressed small color="primary" @click="signUp">sign up</v-btn>
+   <p>or go back to <router-link to="/login">login</router-link>.</p>
   </div>
   </v-card>
   </body>

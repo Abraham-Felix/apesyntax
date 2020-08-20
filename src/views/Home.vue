@@ -11,14 +11,15 @@
           height="200"
         />
       </v-col>
-
       <v-col class="mb-4">
+      <v-card >
         <h1 class="display-2 font-weight-bold mb-3">
-          welcome!
+          welcome to my vue.js experiments.
         </h1>
-
-
-      </v-col>
+        <p>
+         blah,blah,blah,blah,blah,blah,blah,blah... </p>
+        </v-card>
+        </v-col>
     </v-row>
   </v-container>
   </div>
