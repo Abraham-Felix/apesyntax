@@ -12,7 +12,9 @@ input {
    border-radius: 0;
    border: #80808014 solid 1px !important;
 }
-
+a {
+    text-decoration: none;
+}
 /*css-classes*/
 .my-3 {
   margin-top:10vw !important;
