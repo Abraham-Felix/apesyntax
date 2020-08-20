@@ -15,7 +15,6 @@
   <v-card-text>
     <h1>Apesyntax</h1>
     <p> Hello, I am abraham felix i am trying to develop something cool,
-    like a library for us to use in our code and add cool features,
     so <span class="bold">hang</span> on tight this could be quite a journey!  </p>
   </v-card-text>
   </v-card>
