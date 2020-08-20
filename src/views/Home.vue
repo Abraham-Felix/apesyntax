@@ -14,10 +14,10 @@
       <v-col class="mb-4">
       <v-card >
         <h1 class="display-2 font-weight-bold mb-3">
-          welcome to my vue.js experiments.
+          Hello, World.
         </h1>
         <p>
-         blah,blah,blah,blah,blah,blah,blah,blah... </p>
+         This app runs node.js server and vue.js framework contected to firebase db </p>
         </v-card>
         </v-col>
     </v-row>
@@ -32,3 +32,11 @@ export default {
   name: 'home'
 }
 </script>
+
+<style >
+  .v-card {
+    width: 420px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+</style>
