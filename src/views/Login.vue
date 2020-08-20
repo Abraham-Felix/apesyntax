@@ -29,15 +29,15 @@
     }
   },
   methods: {
-    login: function() {
+      login: function() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
       (user) => {
-        this.$router.go('home' +  user.message)
+        this.$router.go('home' +  user.message + this.created || true)
       },
       (err) => {
         alert('Oops.' + err.message)
       }
-    );
+     );
     }
    }
   }

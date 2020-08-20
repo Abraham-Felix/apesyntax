@@ -72,4 +72,5 @@ const router = new VueRouter({
       else next();
     });
 
+
 export default router;

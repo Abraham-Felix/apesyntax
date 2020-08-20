@@ -40,15 +40,13 @@
         <router-link to="/contact">
         <v-btn depressed small color="primary">Contact</v-btn>
         </router-link>
+
         </div>
         <div class="nav-col-right">
         </div>
 
         <v-spacer></v-spacer>
-
-
-
-
+          <v-btn depressed small color="primary"  @click="logout">Logout</v-btn>
         </v-app-bar>
       </div>
 
@@ -94,6 +92,8 @@
   </v-app>
 </template>
 <script>
+import firebase from 'firebase'
+
 
 
 export default {
@@ -110,8 +110,16 @@ data: () => ({
         url: 'https://www.github.com/abraham-felix',
         target: '_blank'
     },
-  ]
-})
+  ],
+}),
+methods: {
+  logout: function() {
+    firebase.auth().signOut().then(() => {
+      this.$router.replace('login')
+    })
+  },
+
+}
 }
 </script>
 

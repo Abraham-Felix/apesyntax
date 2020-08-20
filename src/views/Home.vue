@@ -1,7 +1,7 @@
 <template>
   <div class="home">
   <v-container>
-    <v-btn @click="logout">Logout</v-btn>
+
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -25,16 +25,9 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+
 
 export default {
-  name: 'home',
-  methods: {
-    logout: function() {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
-      })
-    }
-  }
+  name: 'home'
 }
 </script>
