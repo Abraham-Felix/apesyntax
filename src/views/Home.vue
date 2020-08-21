@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <v-tooltip top>
+        <v-tooltip left >
           <template v-slot:activator="{ on, attrs }">
         <v-img
           :src="require('../assets/apesyntaxlogo.png')"
@@ -13,8 +13,17 @@
           height="200"
         />
         </template>
-         <span>Hello I am Monk,<br>
-         a synthetic Ape.</span>
+        <img class="monk-ico" src="https://celfonica.s3-us-west-1.amazonaws.com/logos/monk-circle+50px.png">
+
+         <span style="display:inline;">
+           you hovered over me!? didn't you?... <br><br>
+         Hello I am Monk,<br>
+         a virtual Ape here to help you!<br><br>
+      <p>"ignore my weird behaviors"</p><br>
+
+    </span>
+
+
         </v-tooltip>
       </v-col>
       <v-col class="mb-4">
@@ -25,7 +34,11 @@
         <p>
          This app runs node.js server and vue.js framework contected to firebase db </p>
          <h4> - New features coming soon!</h4>
-         <li > Skeleton Loader</li>
+         <li > Skeleton Loader with real data</li>
+         <li > Lesson form/viewer/editor </li>
+         <li > google auth / git auth  </li>
+         <br><br>
+         <h4>Look around... or send a message to <router-link to="/contact">contact</router-link></h4><br>
 
         </v-card>
         </v-col>
@@ -57,5 +70,8 @@ export default {
     width:min-content;
     margin-left:auto;
     margin-right:auto;
+  }
+  .noti {
+
   }
 </style>

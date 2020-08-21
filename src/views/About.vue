@@ -8,13 +8,13 @@
    alt="Apesyntax logo"
    class="shrink mr-2 margin center"
    contain
-   src="https://celfonica.s3-us-west-1.amazonaws.com/logos/apesyntax+logo.png"
+   src="https://celfonica.s3-us-west-1.amazonaws.com/imgs/avatar-AbrahamFelix-3.png"
    transition="scale-transition"
    width="100"
  />
   <v-card-text>
-    <h1>Apesyntax</h1>
-    <p> Hello, I am abraham felix i am trying to develop something cool,
+    <h1>Abraham Felix</h1>
+    <p> Hello, I am abraham felix, I am trying to develop something cool,
     so <span class="bold">hang</span> on tight this could be quite a journey!  </p>
   </v-card-text>
   </v-card>
