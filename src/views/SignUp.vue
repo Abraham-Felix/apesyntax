@@ -49,6 +49,8 @@ import firebase from 'firebase';
     padding: 2vh;
     max-width: 600px !important;
     width: min-content;
+    width: 300px;
+    -webkit-box-pack: center;
   }
   button {
     box-shadow: 0px 0px 3px -2px #b6bbc0 ;
