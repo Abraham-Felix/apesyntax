@@ -8,7 +8,7 @@
    alt="Apesyntax logo"
    class="shrink mr-2 margin center"
    contain
-   src="https://celfonica.s3-us-west-1.amazonaws.com/logos/apesyntax+logo.png"
+   src="https://celfonica.s3-us-west-1.amazonaws.com/logos/ape-contact.png"
    transition="scale-transition"
    width="100"
  />

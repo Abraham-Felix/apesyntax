@@ -11,7 +11,7 @@ h2 {
 
 <div id="app">
     <div class="panel-heading">
-        <h2 class="panel-title">write something cool...</h2>
+        <h2 class="panel-title">Write a message</h2>
     </div>
     <div>
         <form id="form" class="form-inline" v-on:submit.prevent="addMessage">
