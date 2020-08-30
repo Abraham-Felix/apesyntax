@@ -53,6 +53,7 @@
                     <v-text-field :rules="emailRules" required label="Email" type="text" id="tutorialEmail" class="form-control" v-model="newTutorial.email">
                     </v-text-field>
                 </div>
+
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Tutorial content</h4>
                 <div class="form-group">
@@ -72,19 +73,26 @@
                     <v-textarea :rules="contentRules" required label="Tutorial content" type="text" id="tutorialContent" class="form-control" v-model="newTutorial.content">
                     </v-textarea>
                 </div>
+                <div class="form-group">
+                  <v-text-field required label="Date" class="form-control" type='date' v-model='newTutorial.date'>
+                  </v-text-field>
+                </div>
                 <v-divider class="m-tb-20"></v-divider>
                 <h4> Preview </h4>
                 <v-card class="m-tb-20" v-model="newTutorial">
-                    <ul>
-                        <li>{{ newTutorial.title }} </li>
-                        <li>
-                            <h6> {{ newTutorial.first }} {{ newTutorial.last }} </h6></li>
+
+                        <v-card-title>{{ newTutorial.title }} </v-card-title>
+
+                            <v-card-subtitle> {{ newTutorial.first }} {{ newTutorial.last }} </v-card-subtitle>
                         <v-divider class="m-tb-20"></v-divider>
-                        <li>{{ newTutorial.content }} </li>
-                        <li>
-                            <h6>{{ newTutorial.language }} </h6></li>
-                        <li>{{ newTutorial.email }} </li>
-                    </ul>
+                        <v-card-text>{{ newTutorial.content }}</v-card-text>
+
+                         <v-card-text >
+                           <h5>{{ newTutorial.language }}</h5>
+                           <h5>{{ newTutorial.email }}</h5>
+                           <h5>{{ newTutorial.date }}</h5>
+                         </v-card-text>
+
                 </v-card>
                 <v-btn class="m-tb-20" @click="markcompleted" type="submit" small color="primary" dark>
                     {{ displayText }}
@@ -129,6 +137,7 @@ export default {
 
     data() {
         return {
+            myDate: new Date().toISOString().slice(0,10),
             dialog: false,
             displayText: 'Push me!',
             newTutorial: {
@@ -138,6 +147,7 @@ export default {
                 last: '',
                 language: '',
                 title: '',
+                date:'',
             },
             languages: [
                 'Html', 'Css', 'Vue', 'Ruby', 'Js', 'Sass', 'Other'
@@ -169,6 +179,7 @@ export default {
             this.newTutorial.email = '';
             this.newTutorial.language = '';
             this.newTutorial.title = '';
+            this.newTutorial.date ='',
             toastr.success('Horray! message sent successfully');
             this.displayText = 'Nice job!';
             this.nameRules = true;

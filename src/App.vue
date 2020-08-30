@@ -61,7 +61,6 @@
      <!-- body -->
       <div id="body">
         <main>
-
           <router-view/>
         </main>
      </div>

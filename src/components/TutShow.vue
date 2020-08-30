@@ -1,5 +1,4 @@
 <style scoped>
-
 h1 {
     color: #ffffff;
 }
@@ -8,8 +7,8 @@ h1 {
 <template>
 <div id="tutShow">
     <h1>Tutorials</h1>
-    <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 " hover>
-        <v-card-title>
+    <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 " >
+        <v-card-title class="center">
             {{ tutorials.title}}
         </v-card-title>
         <v-divider color="#2196f3"></v-divider>
@@ -21,6 +20,9 @@ h1 {
         </v-card-text>
         <v-card-text>
             {{ tutorials.language }}
+        </v-card-text>
+        <v-card-text>
+            {{ tutorials.date }}
         </v-card-text>
     </v-card>
 </div>
