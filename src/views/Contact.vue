@@ -57,4 +57,7 @@ export default {
   .v-input .v-label {
     margin: 0.4vw !important;
 }
+.v-image {
+   z-index: 0 !important;
+}
 </style>

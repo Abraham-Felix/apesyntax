@@ -37,7 +37,7 @@
         </div>
         <div>
             <h1>Tutorial form</h1>
-            <h3> create a new tutorial </h3>
+            <h3> create one</h3>
             <form id="form" class="form-inline" v-on:submit.prevent="addTutorial">
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Author details</h4>
