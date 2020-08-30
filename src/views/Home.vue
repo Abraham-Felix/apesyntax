@@ -28,7 +28,7 @@ li {
 <v-container>
     <v-row class="text-center">
         <v-col cols="12">
-            <v-tooltip center>
+            <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <v-img :src="require('../assets/apesyntaxlogo.png')" class="my-10" contain v-bind="attrs" v-on="on" height="200" />
                 </template>
@@ -37,7 +37,6 @@ li {
              you tried to hovered over me!? didn't you?... <br><br>
              Hello I am Monk,<br>
              a virtual Ape here to help you!<br><br>
-            <p>"ignore my weird behaviors"</p><br>
             </span>
             </v-tooltip>
         </v-col>
