@@ -45,6 +45,9 @@
         <router-link to="/contact">
         <v-btn depressed dark small color="primary">Contact</v-btn>
         </router-link>
+        <router-link to="/tutorials">
+        <v-btn depressed dark small color="primary">Tutorials</v-btn>
+        </router-link>
 
         </div>
         <div class="nav-col-right">

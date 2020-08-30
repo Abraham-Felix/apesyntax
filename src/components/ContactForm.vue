@@ -1,9 +1,5 @@
 <style scoped>
 
-h2 {
-    margin: 2vw;
-    color: dodgerblue;
-}
 
 </style>
 

@@ -40,3 +40,32 @@ a {
     color: #ffffff ;
     text-decoration: none !important;
 }
+h1 {
+  color: #5c6269;
+}
+h2 {
+    margin: 2vw;
+    color: dodgerblue;
+}
+h3 {
+  color:dodgerblue;
+}
+h4 {
+  text-align:left;
+  color: #5c6269;
+}
+.m-tb-20 {
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.v-divider {
+      border-color: #1e90ff;
+}
+.v-dialog {
+  background: #ffffff;
+  padding:20px;
+}
+.left {
+  float:left;
+  text-align: -webkit-left;
+}

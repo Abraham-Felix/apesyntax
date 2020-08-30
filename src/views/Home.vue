@@ -11,12 +11,14 @@ li {
     margin-left: auto;
     margin-right: auto;
     padding: 3vw;
+    margin-top:-90px;
 }
 
 .v-image {
     width: min-content;
     margin-left: auto;
     margin-right: auto;
+    z-index: 9;
 }
 
 </style>
@@ -26,13 +28,13 @@ li {
 <v-container>
     <v-row class="text-center">
         <v-col cols="12">
-            <v-tooltip left>
+            <v-tooltip center>
                 <template v-slot:activator="{ on, attrs }">
                     <v-img :src="require('../assets/apesyntaxlogo.png')" class="my-10" contain v-bind="attrs" v-on="on" height="200" />
                 </template>
                 <img class="monk-ico" src="https://celfonica.s3-us-west-1.amazonaws.com/logos/monk-circle+50px.png">
                 <span style="display:inline;">
-             you hovered over me!? didn't you?... <br><br>
+             you tried to hovered over me!? didn't you?... <br><br>
              Hello I am Monk,<br>
              a virtual Ape here to help you!<br><br>
             <p>"ignore my weird behaviors"</p><br>
@@ -40,14 +42,17 @@ li {
             </v-tooltip>
         </v-col>
         <v-col class="mb-4">
-            <v-card>
+            <v-card >
                 <h3> New features coming soon!</h3>
-                <li> Skeleton Loader with real data</li>
-                <li> Lesson form/viewer/editor </li>
-                <li> google auth / git auth </li>
+                <v-card-text>
+                  <p>- Skeleton Loader with real data</p>
+                   <p>- google auth / git auth </p>
+                 </v-card-text>
                 <br>
                 <br>
-                <h4>Look around... or send a message to <router-link to="/contact">contact</router-link></h4>
+                <h5>Look around... i got a new tutorial component <br>
+                  where i will share some knowledge<br>
+                  or send a <router-link to="/contact">message</router-link>.</h5>
                 <br>
             </v-card>
         </v-col>
