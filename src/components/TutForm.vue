@@ -137,7 +137,6 @@ export default {
 
     data() {
         return {
-            myDate: new Date().toISOString().slice(0,10),
             dialog: false,
             displayText: 'Push me!',
             newTutorial: {
