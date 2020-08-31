@@ -34,9 +34,7 @@ li {
                 </template>
                 <img class="monk-ico" src="https://celfonica.s3-us-west-1.amazonaws.com/logos/monk-circle+50px.png">
                 <span style="display:inline;">
-             you tried to hovered over me!? didn't you?... <br><br>
              Hello I am Monk,<br>
-             a virtual Ape here to help you!<br><br>
             </span>
             </v-tooltip>
         </v-col>

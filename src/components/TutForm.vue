@@ -1,5 +1,7 @@
 <style scoped>
-
+img.preview {
+  width:200px;
+}
 .v-btn {
     height: 50px !important;
     min-width: 50px !important;
@@ -13,7 +15,7 @@
     <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
             <v-btn style="z-index:9;" color="blue lighten-1" dark rounded v-bind="attrs" v-on="on" fixed left>
-                <v-tooltip right >
+                <v-tooltip right>
                     <template v-slot:activator="{ on, attrs }">
                         <v-icon fab dark v-bind="attrs" v-on="on">
                             mdi-plus
@@ -53,6 +55,19 @@
                     <v-text-field :rules="emailRules" required label="Email" type="text" id="tutorialEmail" class="form-control" v-model="newTutorial.email">
                     </v-text-field>
                 </div>
+                <div class="form-goup">
+                  <!-- Img upload input field-->
+                  <div>
+                    <h4 class="m-tb-20">Upload tutorial picture:</h4>
+                  <input class="form-control"  type="file" @change="previewImage" accept="image/+">
+                  <br><v-btn class="m-tb-20" @click=" onUpload();"><v-icon>mdi-upload</v-icon></v-btn>
+                </div>
+                <div>
+                  <p> Progress: {{uploadValue.toFixed()+"%"}}
+                    <progress :value="uploadValue" max="100"></progress>
+                  </p>
+                </div>
+              </div>
 
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Tutorial content</h4>
@@ -74,27 +89,34 @@
                     </v-textarea>
                 </div>
                 <div class="form-group">
-                  <v-text-field required label="Date" class="form-control" type='date' v-model='newTutorial.date'>
-                  </v-text-field>
+                    <v-text-field required label="Date" class="form-control" type='date' v-model='newTutorial.date'>
+                    </v-text-field>
                 </div>
+
+              <div>
+
+                <br>
+
+              </div>
                 <v-divider class="m-tb-20"></v-divider>
                 <h4> Preview </h4>
                 <v-card class="m-tb-20" v-model="newTutorial">
+                  <img class="preview" :src="picture">
+                    <v-card-title class="center">{{ newTutorial.title }} </v-card-title>
+                    <v-card-subtitle> {{ newTutorial.first }} {{ newTutorial.last }} </v-card-subtitle>
+                    <v-divider class="m-tb-20"></v-divider>
+                    <v-card-text>{{ newTutorial.content }}</v-card-text>
 
-                        <v-card-title>{{ newTutorial.title }} </v-card-title>
-
-                            <v-card-subtitle> {{ newTutorial.first }} {{ newTutorial.last }} </v-card-subtitle>
-                        <v-divider class="m-tb-20"></v-divider>
-                        <v-card-text>{{ newTutorial.content }}</v-card-text>
-
-                         <v-card-text >
-                           <h5>{{ newTutorial.language }}</h5>
-                           <h5>{{ newTutorial.email }}</h5>
-                           <h5>{{ newTutorial.date }}</h5>
-                         </v-card-text>
+                    <v-card-text>
+                        <h5>{{ newTutorial.language }}</h5>
+                        <h5>{{ newTutorial.email }}</h5>
+                        <h5>{{ newTutorial.date }}</h5>
+                    </v-card-text>
 
                 </v-card>
-                <v-btn class="m-tb-20" @click="markcompleted" type="submit" small color="primary" dark>
+
+                <!-- Form push btn -->
+                <v-btn class="m-tb-20" @click="markcompleted();" type="submit" small color="primary" dark>
                     {{ displayText }}
                 </v-btn>
             </form>
@@ -127,7 +149,6 @@ if (!Firebase.apps.length) {
 let db = Firebase.database();
 
 let messagesRef = db.ref('tutorials');
-
 export default {
     name: 'tutform',
 
@@ -137,6 +158,9 @@ export default {
 
     data() {
         return {
+            imageData:null,
+            picture:null,
+            uploadValue: 0,
             dialog: false,
             displayText: 'Push me!',
             newTutorial: {
@@ -146,7 +170,8 @@ export default {
                 last: '',
                 language: '',
                 title: '',
-                date:'',
+                date: '',
+                picture:''
             },
             languages: [
                 'Html', 'Css', 'Vue', 'Ruby', 'Js', 'Sass', 'Other'
@@ -170,6 +195,26 @@ export default {
     },
 
     methods: {
+        previewImage(event){
+            this.uploadValue=0;
+            this.picture=null;
+            this.imageData=event.target.files[0];
+        },
+        onUpload() {
+          this.picture=null;
+          const storageRef=Firebase.storage().ref(`tutorials/images/${this.imageData.name}`).put(this.imageData);
+          storageRef.on(`state_changed`, snapshot=>{
+            this.uploadValue=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+          }, error=>{console.log(error.message)},
+          ()=>{this.uploadValue=100;
+          storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+            this.picture=url;
+            this.newTutorial.picture = url;
+            console.log(this.picture);
+            toastr.success('Image Uploaded successfully');
+          })}
+        )
+        },
         addTutorial: function() {
             messagesRef.push(this.newTutorial);
             this.newTutorial.first = '';
@@ -178,7 +223,8 @@ export default {
             this.newTutorial.email = '';
             this.newTutorial.language = '';
             this.newTutorial.title = '';
-            this.newTutorial.date ='',
+            this.newTutorial.date = '',
+            this.newTutorial.picture= '';
             toastr.success('Horray! message sent successfully');
             this.displayText = 'Nice job!';
             this.nameRules = true;

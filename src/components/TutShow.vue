@@ -2,6 +2,9 @@
 h1 {
     color: #ffffff;
 }
+img.preview {
+  max-width:200px;
+}
 </style>
 
 <template>
@@ -9,6 +12,7 @@ h1 {
     <h1>Tutorials</h1>
     <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 " >
         <v-card-title class="center">
+            <img class="preview" :src="tutorials.picture"><br>
             {{ tutorials.title}}
         </v-card-title>
         <v-divider color="#2196f3"></v-divider>
