@@ -120,6 +120,7 @@ img.preview {
                         <h5>{{ newTutorial.email }}</h5>
                         <h5>{{ newTutorial.date }}</h5>
                     </v-card-text>
+
                 </v-card>
 
                 <!-- Form push btn -->
@@ -232,6 +233,7 @@ export default {
           storageRef.snapshot.ref.getDownloadURL().then((url)=>{
             this.picture=url;
             this.newTutorial.picture = url;
+            this.newTutorial.userID= uid;
             console.log(this.picture);
             toastr.success('Image Uploaded successfully');
           })}
