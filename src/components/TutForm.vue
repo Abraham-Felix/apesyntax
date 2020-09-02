@@ -15,8 +15,8 @@ img.preview {
     <v-dialog v-model="dialog" width="500">
         <template  v-slot:activator="{ on, attrs }">
             <v-btn style="z-index:9;" color="blue lighten-1" dark rounded v-bind="attrs" v-on="on" fixed left>
-                <v-tooltip right>
-                    <template v-slot:activator="{ on, attrs }">
+                <v-tooltip right >
+                    <template  v-slot:activator="{ on, attrs }">
                         <v-icon fab dark v-bind="attrs" v-on="on">
                             mdi-plus
                         </v-icon>
@@ -44,7 +44,7 @@ img.preview {
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Author details</h4>
                 <div class="form-group">
-                    <v-text-field :rules="nameRules" required label="First Name" type="text" id="tutorialFirst" class="form-control" v-model="newTutorial.first">
+                    <v-text-field @click="loadUid"  :rules="nameRules" required label="First Name" type="text" id="tutorialFirst" class="form-control" v-model="newTutorial.first">
                     </v-text-field>
                 </div>
                 <div class="form-group">
@@ -72,7 +72,9 @@ img.preview {
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Tutorial content</h4>
                 <div class="form-group">
-                    <v-select required label="Language" id="tutorialLanguage" v-model="newTutorial.language" multiple type="text" autocomplete tags :items="languages" class="form-control">
+                    <v-select required label="Language"
+                    id="tutorialLanguage" v-model="newTutorial.language"
+                    multiple type="text" autocomplete tags :items="languages" class="form-control">
                         <template slot="selection" slot-scope="data">
                             <v-btn>
                                 {{ data.item }}
@@ -96,7 +98,7 @@ img.preview {
                     <v-text-field  required label="Tutorial Sample Code Link" type="url" id="tutorialCode" class="form-control" v-model="newTutorial.code">
                     </v-text-field>
                 </div>
-                <v-text-field value="uid" type="text" v-model="newTutorial.userID">
+                <v-text-field label="User ID" readonly required value="uid" type="text" v-model="newTutorial.userID">
                 </v-text-field>
 
               <div>
@@ -117,9 +119,7 @@ img.preview {
                         <h5>{{ newTutorial.language }}</h5>
                         <h5>{{ newTutorial.email }}</h5>
                         <h5>{{ newTutorial.date }}</h5>
-                        <h5>{{ newTutorial.userID}}</h5>
                     </v-card-text>
-
                 </v-card>
 
                 <!-- Form push btn -->
@@ -140,8 +140,8 @@ import Firebase from 'firebase';
 import toastr from 'toastr';
 
 
-let user = Firebase.auth().currentUser;
-let uid;
+var user = Firebase.auth().currentUser;
+var uid;
 if (user != null) {
   uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
                    // this value to authenticate with your backend server, if
@@ -174,6 +174,7 @@ export default {
     },
     data() {
         return {
+          uid,
             imageData:null,
             picture:null,
             uploadValue: 0,
@@ -213,6 +214,9 @@ export default {
     },
 
     methods: {
+      loadUid(){
+        this.newTutorial.userID= uid;
+      },
         previewImage(event){
             this.uploadValue=0;
             this.picture=null;
@@ -228,7 +232,6 @@ export default {
           storageRef.snapshot.ref.getDownloadURL().then((url)=>{
             this.picture=url;
             this.newTutorial.picture = url;
-            this.newTutorial.userID= uid;
             console.log(this.picture);
             toastr.success('Image Uploaded successfully');
           })}
