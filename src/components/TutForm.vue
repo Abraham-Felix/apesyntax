@@ -216,6 +216,13 @@ export default {
 
     methods: {
       loadUid(){
+        var user = Firebase.auth().currentUser;
+        var uid;
+        if (user != null) {
+          uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                           // this value to authenticate with your backend server, if
+                           // you have one. Use User.getToken() instead.
+        }
         this.newTutorial.userID= uid;
       },
         previewImage(event){
