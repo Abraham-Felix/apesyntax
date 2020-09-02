@@ -26,7 +26,10 @@ img.preview {
             {{ tutorials.language }}
         </v-card-text>
         <v-card-text>
-            {{ tutorials.date }}
+            Code: {{ tutorials.code }}
+        </v-card-text>
+        <v-card-text>
+            Published: {{ tutorials.date }}
         </v-card-text>
     </v-card>
 </div>

@@ -13,7 +13,7 @@ img.preview {
 
 <div id="app">
     <v-dialog v-model="dialog" width="500">
-        <template v-slot:activator="{ on, attrs }">
+        <template  v-slot:activator="{ on, attrs }">
             <v-btn style="z-index:9;" color="blue lighten-1" dark rounded v-bind="attrs" v-on="on" fixed left>
                 <v-tooltip right>
                     <template v-slot:activator="{ on, attrs }">
@@ -92,6 +92,12 @@ img.preview {
                     <v-text-field required label="Date" class="form-control" type='date' v-model='newTutorial.date'>
                     </v-text-field>
                 </div>
+                <div class="form-group">
+                    <v-text-field  required label="Tutorial Sample Code Link" type="url" id="tutorialCode" class="form-control" v-model="newTutorial.code">
+                    </v-text-field>
+                </div>
+                <v-text-field value="uid" type="text" v-model="newTutorial.userID">
+                </v-text-field>
 
               <div>
 
@@ -101,7 +107,7 @@ img.preview {
                 <v-divider class="m-tb-20"></v-divider>
                 <h4> Preview </h4>
                 <v-card class="m-tb-20" v-model="newTutorial">
-                  <img class="preview" :src="picture">
+                  <img class="preview " :src="picture"><br>
                     <v-card-title class="center">{{ newTutorial.title }} </v-card-title>
                     <v-card-subtitle> {{ newTutorial.first }} {{ newTutorial.last }} </v-card-subtitle>
                     <v-divider class="m-tb-20"></v-divider>
@@ -111,6 +117,7 @@ img.preview {
                         <h5>{{ newTutorial.language }}</h5>
                         <h5>{{ newTutorial.email }}</h5>
                         <h5>{{ newTutorial.date }}</h5>
+                        <h5>{{ newTutorial.userID}}</h5>
                     </v-card-text>
 
                 </v-card>
@@ -132,6 +139,15 @@ import Firebase from 'firebase';
 
 import toastr from 'toastr';
 
+
+let user = Firebase.auth().currentUser;
+let uid;
+if (user != null) {
+  uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+}
+
 let config = {
     apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
     authDomain: "apesyntax.firebaseapp.com",
@@ -144,18 +160,18 @@ let config = {
 };
 if (!Firebase.apps.length) {
     Firebase.initializeApp(config);
+    this.newTutorial.userID= uid;
 }
 
 let db = Firebase.database();
 
 let messagesRef = db.ref('tutorials');
+
 export default {
     name: 'tutform',
-
     firebase: {
         tutorials: messagesRef
     },
-
     data() {
         return {
             imageData:null,
@@ -171,10 +187,12 @@ export default {
                 language: '',
                 title: '',
                 date: '',
-                picture:''
+                picture:'',
+                userID: '',
+                code: '',
             },
             languages: [
-                'Html', 'Css', 'Vue', 'Ruby', 'Js', 'Sass', 'Other'
+                'Html', 'CSS', 'VUE', 'React', 'Ruby', 'JS', 'SASS', 'Python','PHP','C#','JAVA','Other',
             ],
             nameRules: [
                 v => !!v || 'you must type something',
@@ -210,6 +228,7 @@ export default {
           storageRef.snapshot.ref.getDownloadURL().then((url)=>{
             this.picture=url;
             this.newTutorial.picture = url;
+            this.newTutorial.userID= uid;
             console.log(this.picture);
             toastr.success('Image Uploaded successfully');
           })}
@@ -224,7 +243,9 @@ export default {
             this.newTutorial.language = '';
             this.newTutorial.title = '';
             this.newTutorial.date = '',
-            this.newTutorial.picture= '';
+            this.newTutorial.picture= '',
+            this.newTutorial.userID= '',
+            this.newTutorial.code= '',
             toastr.success('Horray! message sent successfully');
             this.displayText = 'Nice job!';
             this.nameRules = true;
