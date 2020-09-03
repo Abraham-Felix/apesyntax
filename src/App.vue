@@ -54,8 +54,41 @@
         </div>
 
         <v-spacer></v-spacer>
-          <v-btn depressed small color="primary"  @click="logout">Logout</v-btn>
-        </v-app-bar>
+        <v-menu
+        v-if="user.loggedIn"
+     transition="slide-y-transition"
+     bottom
+   >
+     <template v-slot:activator="{ on, attrs }">
+       <v-btn
+         class="purple"
+         color="primary"
+         dark
+         v-bind="attrs"
+         v-on="on"
+       >
+         <v-icon>mdi-account</v-icon>
+       </v-btn>
+     </template>
+     <v-list>
+       <v-list-item
+         v-for="(item, i) in items"
+         :key="i"
+       >
+       <a
+            :href="item.url"
+            :target="item.target">
+         <v-list-item-title >{{ item.title }}
+         </v-list-item-title>
+       </a>
+       </v-list-item>
+       <v-list-item
+       @click="logout"
+       >Logout
+     </v-list-item>
+     </v-list>
+   </v-menu>
+          </v-app-bar>
       </div>
 
      <!-- body -->
@@ -101,12 +134,25 @@
 </template>
 <script>
 import firebase from 'firebase'
-
+import { mapGetters } from "vuex";
 
 
 export default {
   name: 'home',
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user"
+    })
+  },
 data: () => ({
+  items: [
+        {
+          title: "Profile",
+          url: "/profile",
+          active: true,
+        }
+      ],
   icons: [
     {
         name:'mdi-google',
@@ -147,7 +193,6 @@ methods: {
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-exact-active {
       color: #42b983;
     }

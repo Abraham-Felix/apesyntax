@@ -26,7 +26,7 @@ li {
 <template>
 
 <v-container>
-    <v-row class="text-center">
+  <v-row class="text-center">
         <v-col cols="12">
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -59,6 +59,7 @@ li {
 </template>
 
 <script>
+
 
 export default {
     name: 'home'

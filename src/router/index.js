@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Contact from '../views/Contact.vue'
 import Tutorials from '../views/Tutorials.vue'
+import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 
@@ -39,6 +40,14 @@ Vue.use(VueRouter)
     path: '/tutorials',
     name: 'Tutorials',
     component: Tutorials,
+    meta: {
+      requiresAuth:true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       requiresAuth:true
     }
