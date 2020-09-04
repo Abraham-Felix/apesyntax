@@ -26,7 +26,8 @@ img.preview {
             {{ tutorials.language }}
         </v-card-text>
         <v-card-text>
-            Code: {{ tutorials.code }}
+            <v-icon>mdi-codepen</v-icon>
+            <a v-bind:href="''"> {{ tutorials.code }} </a>
         </v-card-text>
         <v-card-text>
             Published: {{ tutorials.date }}
@@ -45,7 +46,8 @@ export default {
             tutorials: [],
         }
     },
-    methods: {},
+    methods: {
+    },
     created() {
         this.$http.get('https://apesyntax.firebaseio.com/tutorials.json').then(response => response.json())
             .then(data => {
