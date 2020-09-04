@@ -9,7 +9,7 @@ import axios from "axios";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {
-<<<<<<< HEAD
+
   apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
   authDomain: "apesyntax.firebaseapp.com",
   databaseURL: "https://apesyntax.firebaseio.com",
@@ -18,11 +18,6 @@ let config = {
   messagingSenderId: "970915545e858",
   appId: "1:970915545858:web:e9b093968d646dc8e0781b",
   measurementId: "G-15YM4ZEF9V"
-=======
-  // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  // timeout: 60 * 1000, // Timeout
-  // withCredentials: true, // Check cross-site Access-Control
->>>>>>> ab7b3afe74ad958e3898b516508a38af78ec0184
 };
 
 const _axios = axios.create(config);
@@ -50,7 +45,7 @@ _axios.interceptors.response.use(
   }
 );
 
-Plugin.install = function(Vue, options) {
+Plugin.install = function(Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
