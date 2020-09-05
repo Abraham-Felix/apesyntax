@@ -25,15 +25,15 @@ button {
 <v-form class="contactForm">
     <v-card class="center">
         <div class="login">
-            <h3>Sign In</h3>
+            <h3>Log In</h3>
             <br>
             <div class="form-group">
                 <v-text-field class="form-control" type="text" v-model="email" placeholder="Email">
                 </v-text-field>
             </div>
-            <v-text-field class="form-control" type="password" v-model="password" placeholder="Password">
+            <v-text-field class="form-control" type="password" @keyup.enter="login" v-model="password" placeholder="Password">
             </v-text-field>
-            <v-btn depressed small color="primary" @click="login">conect</v-btn>
+            <v-btn depressed small color="primary"  @click="login">conect</v-btn>
             <p>Or you can
                 <router-link to="/sign-up">create one.</router-link>
             </p>
