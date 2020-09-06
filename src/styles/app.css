@@ -2,6 +2,20 @@
 html  {
   overflow: auto;
 }
+h1 {
+  color: #5c6269;
+}
+h2 {
+    margin: 2vw;
+    color: dodgerblue;
+}
+h3 {
+  color:dodgerblue;
+}
+h4 {
+  text-align:left;
+  color: #5c6269;
+}
 main  {
     height: 700px !important;
     position: relative;
@@ -16,6 +30,24 @@ a {
     text-decoration: none;
 }
 /*css-classes*/
+.m-tb-20 {
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.v-divider {
+      border-color: #1e90ff;
+}
+.v-dialog {
+  background: #ffffff;
+  padding:20px;
+}
+.left {
+  float:left;
+  text-align: -webkit-left;
+}
+.v-card {
+  height: auto;
+}
 .my-3 {
   margin-top:10vw !important;
 }
@@ -39,33 +71,4 @@ a {
     font-weight: bold;
     color: #ffffff ;
     text-decoration: none !important;
-}
-h1 {
-  color: #5c6269;
-}
-h2 {
-    margin: 2vw;
-    color: dodgerblue;
-}
-h3 {
-  color:dodgerblue;
-}
-h4 {
-  text-align:left;
-  color: #5c6269;
-}
-.m-tb-20 {
-  margin-top:20px;
-  margin-bottom:20px;
-}
-.v-divider {
-      border-color: #1e90ff;
-}
-.v-dialog {
-  background: #ffffff;
-  padding:20px;
-}
-.left {
-  float:left;
-  text-align: -webkit-left;
 }

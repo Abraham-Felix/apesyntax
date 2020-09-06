@@ -1,37 +1,94 @@
 <style scoped>
+
 img.preview {
-  width:200px;
+    width: 200px;
+}
+button {
+  box-shadow: 0px 0px 3px -2px #b6bbc0 ;
+  color:white;
+  padding:.5vh;
+  border-radius: 10px;
+  margin:2vh;
 }
 .v-btn {
     height: 50px !important;
     min-width: 50px !important;
 }
+
 .v-card {
     margin-top: 10vw;
     margin-bottom: 10vw;
-    height: 400px;
+    height: auto;
     padding: 2vh;
     max-width: 600px !important;
     width: 300px;
     -webkit-box-pack: center;
 }
+
+.block {
+    display: block!important;
+}
+
+.uid {
+  font-size: 12px;
+}
 </style>
+
 <template>
-   <div id="app">
-     <v-container>
-     <v-card>
-          <v-icon> mdi-shield-account</v-icon>
-          <v-simple-text  class="mb-10"> {{ uid }} </v-simple-text>
-   </v-card>
- </v-container>
-    </div>
+
+<div id="app">
+    <v-container>
+        <v-card class="center block">
+          <v-text-field readonly v-model="uid" label="Uid">
+          </v-text-field>
+            <img :src="authUser.photoURL" width="150">
+            <p>What's up, {{authUser.displayName || 'my friend'}} </p>
+             <br>
+
+             <v-icon color=green v-if="linkedGoogle" >mdi-google</v-icon>
+             <v-icon color=green v-if="linkedPassword"> mdi-email-check</v-icon>
+             <v-divider class="m-tb-20"></v-divider>
+            <form  @submit.prevent="updateProfile">
+              <h4>Update Profile</h4>
+              <br>
+              <input  class="form-control" v-model="displayName" placeholder="your name">
+              <input class="form-control" v-model="photoURL" placeholder="your photo url">
+              <button @keyup.enter="updateProfile"> update </button>
+            </form>
+
+            <form  @submit.prevent="updateEmail">
+              <h4>Update email</h4>
+              <br>
+              <input type="email" class="form-control" v-model="email" placeholder="enter new email">
+              <v-btn depressed small color="primary" @keyup.enter="updateEmail"> update </v-btn>
+            </form>
+
+            <form  @submit.prevent="updatePassword">
+              <h4>Update password</h4>
+              <br>
+              <input type="password" class="form-control" v-model="newPassword" placeholder="enter new password">
+              <v-btn depressed small color="primary" @keyup.enter="updatePassword"> update </v-btn>
+            </form>
+
+            <div v-if="!linkedGoogle">
+             <h4>Link google account</h4>
+             <v-btn  @click="linkGoogle"><v-icon>mdi-google</v-icon></v-btn>
+            </div>
+            <div v-if="linkedGoogle">
+             <h4>unlik google account</h4>
+             <v-btn @click="unlinkGoogle"><v-icon color=red>mdi-email-off</v-icon></v-btn>
+            </div>
+
+        </v-card>
+    </v-container>
+</div>
+
 </template>
+
 <script>
 
-import Firebase from 'firebase';
-
-
-
+import firebase from 'firebase';
+import toastr from 'toastr';
 let config = {
     apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
     authDomain: "apesyntax.firebaseapp.com",
@@ -42,18 +99,12 @@ let config = {
     appId: "1:970915545858:web:e9b093968d646dc8e0781b",
     measurementId: "G-15YM4ZEF9V"
 };
-if (!Firebase.apps.length) {
-    Firebase.initializeApp(config);
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
 }
-let db = Firebase.database();
+let db = firebase.database();
 let messagesRef = db.ref('tutorials');
-var user = Firebase.auth().currentUser;
-var uid;
-if (user != null) {
-  uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-                   // this value to authenticate with your backend server, if
-                   // you have one. Use User.getToken() instead.
-}
+
 export default {
     name: 'profile',
     firebase: {
@@ -61,16 +112,64 @@ export default {
     },
     data() {
         return {
-          uid,
-    }
+            email: '',
+            displayName: '',
+            uid: '',
+            newPassword: '',
+            providerData: '',
+            authUser: '',
+        }
     },
-    methods: {
-      loadUid: function(){
-        uid;
+    computed:{
+      linkedGoogle () {
+        return !!this.authUser.providerData.find(provider => provider.providerId === 'google.com')
+      },
+      linkedPassword () {
+        return !!this.authUser.providerData.find(provider => provider.providerId === 'password')
       }
     },
-    beforeCreated: function(){
-    this.$nextTick(this.loadUid)
+    methods: {
+      updateProfile() {
+        this.authUser.updateProfile({
+          displayName: this.displayName ,
+          photoURL: this.photoURL
+        }); toastr.success('Nice! profile updated')
+      },
+      updateEmail() {
+        this.authUser.updateEmail(this.email)
+        toastr.success('Cool! email updated')
+      },
+      updatePassword() {
+        this.authUser.updatePassword(this.newPassword)
+        .then(() => { this.newPassword = null })
+        .catch(err =>
+            alert('Oops.' + err.message))
+            toastr.success('Wow! password updated')
+      },
+      linkGoogle: function(){
+        const provider = new firebase.auth.GoogleAuthProvider()
+        this.authUser.linkWithPopup(provider)
+      },
+      unlinkGoogle: function(){
+        this.authUser.unlink('google.com')
+      },
+    },
+    created: function() {
+        // functions
+        data => console.log(data.user, data.credential.accessToken)
+        firebase.auth().onAuthStateChanged(user => {
+            this.authUser = user
+            if (user) {
+                this.displayName = user.displayName
+                this.photoURL = user.photoURL
+                this.email = user.email
+                this.uid = user.uid
+                this.providerData = user.providerData
+                this.authUser = user
+            }
+        })
+
+    }
 }
-  }
+
 </script>

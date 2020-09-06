@@ -2,7 +2,6 @@ import firebase from 'firebase'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
 import Contact from '../views/Contact.vue'
 import Tutorials from '../views/Tutorials.vue'
 import Profile from '../views/Profile.vue'
@@ -20,14 +19,6 @@ Vue.use(VueRouter)
       path: '/',
       redirect: '/login'
     },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-    meta: {
-      requiresAuth:true
-    }
-  },
   {
     path: '/contact',
     name: 'Contact',
@@ -82,12 +73,14 @@ const router = new VueRouter({
 });
 
     router.beforeEach((to, from, next) =>  {
+
       const currentUser = firebase.auth().currentUser;
       const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
       if (requiresAuth && !currentUser) next('login');
-      else if (!requiresAuth && currentUser) next('home');
-      else next();
+      else if (!requiresAuth && currentUser) next('profile')
+      else next(firebase.auth().onAuthStateChanged(user => {
+        this.authUser = user}));
     });
 
 

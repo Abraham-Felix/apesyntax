@@ -4,8 +4,9 @@
  <v-card v-if="authUser" class="center block">
  <h5> sign in as <p>{{authUser.email}} </p> </h5>
  <img :src="authUser.photoURL" width="150">
- <p>What's up, {{authUser.displayName || 'my friend'}} </p>
+ <p>What's up, {{authUser.displayName || 'my friend? you can asign your self a name below'}} </p>
  <br>
+
 </v-card>
  <v-card v-else class="center block">
    <h3> Sign up </h3>
@@ -27,6 +28,7 @@
 <script>
 
 import firebase from 'firebase';
+import toastr from 'toastr';
 
   export default {
     name:  'signUp',
@@ -54,11 +56,24 @@ import firebase from 'firebase';
       .then(
         data => console.log(data.user, data.credential.accessToken)
       )
-    }
+    },
+    updateProfile() {
+      this.authUser.updateProfile({
+        displayName: this.displayName ,
+        photoURL: this.photoURL
+      }); toastr.success('Nice! profile updated')
+    },
   },
   created () {
-    firebase.auth().onAuthStateChanged(user => { this.authUser = user })
-  }
+    firebase.auth().onAuthStateChanged(user => {
+      this.authUser = user
+      if (user) {
+        this.displayName = user.displayName
+        this.photoURL = user.photoURL
+        this.email = user.email
+      }
+    })
+  },
 }
 
 </script>
@@ -66,7 +81,7 @@ import firebase from 'firebase';
   <style scoped>
   .v-card {
     margin: 10vw;
-    height: 400px;
+    height: auto;
     padding: 2vh;
     max-width: 600px !important;
     width: min-content;

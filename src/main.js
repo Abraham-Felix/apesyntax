@@ -1,11 +1,11 @@
 // modules
 import Vue from 'vue'
-import './plugins/axios'
 import firebase from 'firebase'
 import VueResorce from 'vue-resource'
+import './plugins/axios'
+import vuetify from './plugins/vuetify';
 // components
 import App from './App.vue';
-import vuetify from './plugins/vuetify';
 import router from './router';
 import store from "./store";
 // css
@@ -18,7 +18,9 @@ let app = '';
 
 firebase.auth().onAuthStateChanged(user =>  {
 store.dispatch("fetchUser", user);
+this.authUser = user
 });
+
 
 
 firebase.auth().onAuthStateChanged(() => {

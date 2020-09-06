@@ -39,7 +39,11 @@ h5 {
             <p>Or you can
                 <router-link to="/sign-up">create one.</router-link>
             </p>
-            
+            <div>
+            <h5>Sign in with Google</h5>
+            <v-btn @click="signInWithGoogle"><v-icon>mdi-google</v-icon></v-btn>
+           </div>
+
         </div>
     </v-card>
 </v-form>
@@ -68,6 +72,17 @@ export default {
                     alert('Oops.' + err.message)
                 }
             )
+        },
+        signInWithGoogle: function(){
+          const provider = new firebase.auth.GoogleAuthProvider()
+          firebase.auth().signInWithPopup(provider)
+          .then(
+              (user) => {
+                  this.$router.go('home' + user.message + this.created || true)
+                }, (err) => {
+                  alert('Oops.' + err.message)
+              }
+          )
         },
 
     }

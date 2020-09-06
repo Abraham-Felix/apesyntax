@@ -36,9 +36,6 @@
           />
         </div>
         <div class="nav-col-mid">
-        <router-link to="/home">
-        <v-btn depressed small color="primary">Home</v-btn>
-        </router-link>
         <router-link to="/about">
         <v-btn depressed small color="primary">About</v-btn>
         </router-link>
@@ -142,7 +139,7 @@ export default {
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
-      user: "user"
+      user: "user",
     })
   },
 data: () => ({
@@ -175,9 +172,8 @@ methods: {
   },
 
 },
-created () {
-  firebase.auth().onAuthStateChanged(user => { this.authUser = user })
-}
+
+
 }
 </script>
 
