@@ -21,7 +21,7 @@ button {
     height: auto;
     padding: 2vh;
     max-width: 600px !important;
-    width: 300px;
+    width: 600px;
     -webkit-box-pack: center;
 }
 
@@ -42,18 +42,20 @@ button {
           <v-text-field readonly v-model="uid" label="Uid">
           </v-text-field>
             <img :src="authUser.photoURL" width="150">
-            <p>What's up, {{authUser.displayName || 'my friend'}} </p>
+            <p>What's up, {{authUser.displayName || 'my friend'}}  I know you like {{authUser.favoriteFood || 'food'}}</p>
              <br>
-
              <v-icon color=green v-if="linkedGoogle" >mdi-google</v-icon>
              <v-icon color=green v-if="linkedPassword"> mdi-email-check</v-icon>
              <v-divider class="m-tb-20"></v-divider>
+
             <form  @submit.prevent="updateProfile">
               <h4>Update Profile</h4>
               <br>
-              <input  class="form-control" v-model="displayName" placeholder="your name">
+              <div>
+              <input  class="form-control" v-model="displayName" placeholder="your name"><br>
               <input class="form-control" v-model="photoURL" placeholder="your photo url">
-              <button @keyup.enter="updateProfile"> update </button>
+              </div>
+              <v-btn depressed small color="primary" @keyup.enter="updateProfile"> update </v-btn>
             </form>
 
             <form  @submit.prevent="updateEmail">
@@ -70,12 +72,20 @@ button {
               <v-btn depressed small color="primary" @keyup.enter="updatePassword"> update </v-btn>
             </form>
 
+            <form  @submit.prevent="updateCustomDetails">
+              <h4>Update extra details</h4>
+              <br>
+              <input type="text" v-model="usersDetails.favoriteFood" label="Fav language" placeholder="enter favorite programing language" class="form-control">
+              <v-btn type="submit" depressed small color="primary" @keyup.enter="updateCustomDetails"> update </v-btn>
+            </form>
+
             <div v-if="!linkedGoogle">
              <h4>Link google account</h4>
              <v-btn  @click="linkGoogle"><v-icon>mdi-google</v-icon></v-btn>
             </div>
+
             <div v-if="linkedGoogle">
-             <h4>unlik google account</h4>
+             <h4>unlink google account</h4>
              <v-btn @click="unlinkGoogle"><v-icon color=red>mdi-email-off</v-icon></v-btn>
             </div>
 
@@ -86,7 +96,6 @@ button {
 </template>
 
 <script>
-
 import firebase from 'firebase';
 import toastr from 'toastr';
 let config = {
@@ -104,7 +113,7 @@ if (!firebase.apps.length) {
 }
 let db = firebase.database();
 let messagesRef = db.ref('tutorials');
-
+let usersRef = db.ref('users');
 export default {
     name: 'profile',
     firebase: {
@@ -118,6 +127,10 @@ export default {
             newPassword: '',
             providerData: '',
             authUser: '',
+            usersDetails: {
+              favoriteFood: '',
+              userID:'',
+            },
         }
     },
     computed:{
@@ -139,6 +152,13 @@ export default {
         this.authUser.updateEmail(this.email)
         toastr.success('Cool! email updated')
       },
+      updateCustomDetails: function() {
+
+        usersRef.push(this.usersDetails);
+        this.usersDetails.favoriteFood= '';
+        this.usersDetails.userID= '' ;
+        toastr.success('Nice! extra details updated');
+      },
       updatePassword() {
         this.authUser.updatePassword(this.newPassword)
         .then(() => { this.newPassword = null })
@@ -156,6 +176,14 @@ export default {
     },
     created: function() {
         // functions
+        var user = firebase.auth().currentUser;
+        var uid;
+        if (user != null) {
+          uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                           // this value to authenticate with your backend server, if
+                           // you have one. Use User.getToken() instead.
+        }
+          this.usersDetails.userID= uid;
         data => console.log(data.user, data.credential.accessToken)
         firebase.auth().onAuthStateChanged(user => {
             this.authUser = user
@@ -165,7 +193,7 @@ export default {
                 this.email = user.email
                 this.uid = user.uid
                 this.providerData = user.providerData
-                this.authUser = user
+
             }
         })
 
