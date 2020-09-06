@@ -62,8 +62,18 @@ a {
   .v-select.v-text-field input {
     position: absolute;
 }
-.v-card__subtitle, .v-card__text, .v-card__title {
-    padding: 4vw;
+.v-parallax__image {
+    position: absolute;
+    /* bottom: 0; */
+    left: 50%;
+    min-width: 100%;
+    /* min-height: 100%; */
+    height: -webkit-fill-available;
+    display: inline-grid;
+    transform: translate(-50%, 0);
+    will-change: transform;
+    transition: 0.3s opacity cubic-bezier(0.25, 0.8, 0.5, 1);
+    z-index: 1;
 }
 /*ID-classes*/
 #nav a {
@@ -75,3 +85,4 @@ a {
     color: #ffffff ;
     text-decoration: none !important;
 }
+/* @media*/
