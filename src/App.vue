@@ -205,5 +205,11 @@ methods: {
 .nav-col-left, .nav-col-right {
   width:20%;
 }
-
+// iphone6/7/8/9/x/+/S
+@media only screen and (max-width: 400px){
+    .v-parallax__content {
+       padding:0px !important;
+       transition: 1s;
+       }
+}
 </style>

@@ -5,16 +5,25 @@ h1 {
 img.preview {
   max-width:200px;
 }
-.tut-show {
-  margin:20px !important;
-}
+
 .v-card {
-  width: auto;
+  width: auto !important;
+}
+.v-card-title {
+  word-break: break-word;
+}
+.v-divider {
+  max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container {
+  padding:0px;
 }
 </style>
 
 <template>
-<div id="tutShow">
+<v-container id="tutshow">
     <h1>Tutorials</h1>
     <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 tut-show" >
         <v-card-title class="center">
@@ -39,7 +48,7 @@ img.preview {
             Published: {{ tutorials.date }}
         </v-card-text>
     </v-card>
-</div>
+</v-container>
 
 </template>
 
