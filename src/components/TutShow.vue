@@ -5,12 +5,15 @@ h1 {
 img.preview {
   max-width:200px;
 }
+.tut-show {
+  margin:20px !important;
+}
 </style>
 
 <template>
 <div id="tutShow">
     <h1>Tutorials</h1>
-    <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 " >
+    <v-card v-for="(tutorials,index) in tutorials" :key="index" class="m-tb-20 tut-show" >
         <v-card-title class="center">
             <img class="preview" :src="tutorials.picture"><br>
             {{ tutorials.title}}

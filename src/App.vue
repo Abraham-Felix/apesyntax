@@ -200,6 +200,7 @@ methods: {
 }
 .nav-col-mid {
   width:60%;
+  display: table;
 }
 .nav-col-left, .nav-col-right {
   width:20%;
