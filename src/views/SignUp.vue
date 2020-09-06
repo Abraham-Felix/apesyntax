@@ -1,16 +1,26 @@
 <template>
 <body>
-<v-card class="center">
- <div class="sign-up">
- <h3> Sign up </h3>
+
+ <v-card v-if="authUser" class="center block">
+ <h5> sign in as <p>{{authUser.email}} </p> </h5>
+ <img :src="authUser.photoURL" width="150">
+ <p>What's up, {{authUser.displayName || 'my friend'}} </p>
  <br>
+</v-card>
+ <v-card v-else class="center block">
+   <h3> Sign up </h3>
+   <form @submit.prevent="register" class="sign-up">
  <p>Let's create a new account!</p>
    <input type="text" v-model="email" placeholder="Email"><br>
    <input type="password"  @keyup.enter="signUp" v-model="password" placeholder="Password"><br>
-     <v-btn depressed small color="primary" @click="signUp">sign up</v-btn>
+     <v-btn depressed small color="primary" @click="register">sign up</v-btn>
    <p>or go back to <router-link to="/login">login</router-link>.</p>
+   <div>
+   <h5>Sign in with Google</h5>
+   <button @click="signInWithGoogle"><v-icon>mdi-google</v-icon></button>
   </div>
-  </v-card>
+  </form>
+</v-card>
   </body>
 </template>
 
@@ -23,20 +33,31 @@ import firebase from 'firebase';
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        authUser: null
       }
     },
     methods: {
-      signUp: function() {
+      register: function() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
       (user) => {
           this.$router.go('home' + user.message)
-        },
+        } ,
        (err) => {
           alert('Oops.' + err.message)
         }
       );
+    },
+    signInWithGoogle: function(){
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithPopup(provider)
+      .then(
+        data => console.log(data.user, data.credential.accessToken)
+      )
     }
+  },
+  created () {
+    firebase.auth().onAuthStateChanged(user => { this.authUser = user })
   }
 }
 
@@ -68,4 +89,7 @@ import firebase from 'firebase';
     margin-top: 20px;
     font-size: 11px;
     }
+  .block {
+    display:block!important;
+  }
 </style>

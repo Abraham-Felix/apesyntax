@@ -20,7 +20,6 @@ img.preview {
    <div id="app">
      <v-container>
      <v-card>
-
           <v-icon> mdi-shield-account</v-icon>
           <v-simple-text  class="mb-10"> {{ uid }} </v-simple-text>
    </v-card>

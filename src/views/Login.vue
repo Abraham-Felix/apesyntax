@@ -2,7 +2,7 @@
 
 .v-card {
     margin: 10vw;
-    height: 400px;
+    height: 500px;
     padding: 2vh;
     max-width: 600px !important;
     width: 300px;
@@ -17,7 +17,9 @@ button {
     border-radius: 10px;
     margin: 2vh;
 }
-
+h5 {
+  color: dodgerblue;
+}
 </style>
 
 <template>
@@ -37,6 +39,7 @@ button {
             <p>Or you can
                 <router-link to="/sign-up">create one.</router-link>
             </p>
+            
         </div>
     </v-card>
 </v-form>
@@ -57,14 +60,16 @@ export default {
     },
     methods: {
         login: function() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+            .then(
                 (user) => {
                     this.$router.go('home' + user.message + this.created || true)
                 }, (err) => {
                     alert('Oops.' + err.message)
                 }
-            );
-        }
+            )
+        },
+
     }
 }
 

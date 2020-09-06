@@ -168,11 +168,15 @@ data: () => ({
 }),
 methods: {
   logout: function() {
-    firebase.auth().signOut().then(() => {
+    firebase.auth().signOut()
+    .then(() => {
       this.$router.replace('login')
     })
   },
 
+},
+created () {
+  firebase.auth().onAuthStateChanged(user => { this.authUser = user })
 }
 }
 </script>
