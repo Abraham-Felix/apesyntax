@@ -12,14 +12,14 @@
    <form @submit.prevent="register" class="sign-up">
  <p>Let's create a new account!</p>
    <input type="text" v-model="email" placeholder="Email"><br>
-   <input type="password"  @keyup.enter="signUp" v-model="password" placeholder="Password"><br>
+   <input type="password"  @keyup.enter="register" v-model="password" placeholder="Password"><br>
      <v-btn depressed small color="primary" @click="register">sign up</v-btn>
    <p>or go back to <router-link to="/login">login</router-link>.</p>
-   <div>
-   <h5>Sign in with Google</h5>
-   <button @click="signInWithGoogle"><v-icon>mdi-google</v-icon></button>
-  </div>
   </form>
+  <div>
+  <h5>Sign in with Google</h5>
+  <v-btn @click="signInWithGoogle"><v-icon>mdi-google</v-icon></v-btn>
+ </div>
 </v-card>
   </body>
 </template>
