@@ -21,7 +21,7 @@ button {
     height: auto;
     padding: 2vh;
     max-width: 600px !important;
-    width: 600px;
+    width: auto;
     -webkit-box-pack: center;
 }
 

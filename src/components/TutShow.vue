@@ -8,6 +8,9 @@ img.preview {
 .tut-show {
   margin:20px !important;
 }
+.v-card {
+  width: auto;
+}
 </style>
 
 <template>
