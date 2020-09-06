@@ -5,7 +5,6 @@ h1 {
 img.preview {
   max-width:200px;
 }
-
 .v-card {
   width: auto !important;
 }
@@ -19,6 +18,9 @@ img.preview {
 }
 .container {
   padding:0px;
+}
+.img-link {
+  line-break: anywhere;
 }
 </style>
 
@@ -42,7 +44,7 @@ img.preview {
         </v-card-text>
         <v-card-text>
             <v-icon>mdi-codepen</v-icon>
-            <a v-bind:href="''"> {{ tutorials.code }} </a>
+            <a class="img-link" v-bind:href="''"> {{ tutorials.code }} </a>
         </v-card-text>
         <v-card-text>
             Published: {{ tutorials.date }}
