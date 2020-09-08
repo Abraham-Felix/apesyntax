@@ -1,5 +1,6 @@
 <template>
-<body>
+<div id="app">
+  <ChatApp/>
 <v-card
    class="mx-auto"
    max-width="344"
@@ -12,16 +13,18 @@
    transition="scale-transition"
    width="100"
  />
+
   <v-card-text>
     <h1>contact form</h1>
      <ContactForm/>
     </v-card-text>
   </v-card>
-  </body>
+</div>
+
 </template>
 
 <script>
-
+import ChatApp from '../components/ChatApp.vue';
 import ContactForm from '../components/ContactForm.vue';
 
 
@@ -29,6 +32,7 @@ export default {
   name: 'contact',
   components: {
     ContactForm,
+    ChatApp,
   }
 }
 

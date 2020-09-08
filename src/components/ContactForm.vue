@@ -38,26 +38,14 @@
 
 <script>
 
-import Firebase from 'firebase';
+import firebase from '../plugins/firebase'
 
 import toastr from 'toastr';
 
-let config = {
-    apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
-    authDomain: "apesyntax.firebaseapp.com",
-    databaseURL: "https://apesyntax.firebaseio.com",
-    projectId: "apesyntax",
-    storageBucket: "apesyntax.appspot.com",
-    messagingSenderId: "970915545e858",
-    appId: "1:970915545858:web:e9b093968d646dc8e0781b",
-    measurementId: "G-15YM4ZEF9V"
-};
 
-let app = Firebase.initializeApp(config);
+let db = firebase.database();
 
-let db = app.database();
-
-let messagesRef = db.ref('messages');
+let messagesRef = db.ref('contact-messages');
 
 export default {
     name: 'contactform',

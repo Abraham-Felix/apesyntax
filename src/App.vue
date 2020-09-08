@@ -135,7 +135,7 @@ import { mapGetters } from "vuex";
 
 
 export default {
-  name: 'home',
+  name: 'App',
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({

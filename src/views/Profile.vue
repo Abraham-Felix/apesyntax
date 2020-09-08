@@ -69,7 +69,7 @@ display: inline-grid;
 }
 .update{
   height:28px !important;
-  width:fill-available;
+  width: auto;
 }
 </style>
 
@@ -139,21 +139,9 @@ display: inline-grid;
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from '../plugins/firebase'
 import toastr from 'toastr';
-let config = {
-    apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
-    authDomain: "apesyntax.firebaseapp.com",
-    databaseURL: "https://apesyntax.firebaseio.com",
-    projectId: "apesyntax",
-    storageBucket: "apesyntax.appspot.com",
-    messagingSenderId: "970915545e858",
-    appId: "1:970915545858:web:e9b093968d646dc8e0781b",
-    measurementId: "G-15YM4ZEF9V"
-};
-if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-}
+
 let db = firebase.database();
 let messagesRef = db.ref('tutorials');
 let usersRef = db.ref('users');
