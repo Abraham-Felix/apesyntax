@@ -9,7 +9,7 @@
 <div id="app">
     <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn style="z-index:9;" color="orange darken-5" dark rounded v-bind="attrs" v-on="on" fixed right>
+            <v-btn style="z-index:9;" color="orange darken-5" dark rounded v-bind="attrs" v-on="on" class="m-tb-20" fixed right>
                 <v-tooltip left>
                     <template v-slot:activator="{ on, attrs }">
                         <v-icon fab dark v-bind="attrs" v-on="on">
@@ -34,50 +34,56 @@
               <h1>Vue School Chat Room</h1>
               <!-- Messages -->
               <div v-bind:key="message" v-for="message in messages" class="card">
-                <div class="card-body">
+                <v-card padding="10px" class="pt-3 m-tb-20">
+
                   <!-- nickname -->
-                  <h6 class="card-subtitle mb-2 text-muted">{{ message.nickname }}</h6>
+                  <h4 class="card-subtitle mb-2 ml-3 text-muted">{{ message.nickname }}</h4>
                   <!-- content -->
-                  <p v-if="message !== editingMessage" class="card-text">{{ message.text }}</p>
-                  <textarea v-else v-model="messageText" class="form-control"></textarea>
+                  <p v-if="message !== editingMessage" class="card-text ml-3 ">{{ message.text }}</p>
+                  <v-textarea v-else v-model="messageText" class="form-control"></v-textarea>
                   <!-- actions -->
                   <div v-if="message !== editingMessage">
-                    <a @click.prevent="deleteMessage(message)" href="#" class="card-link">delete</a>
-                    <a @click.prevent="editMessage(message)" href="#" class="card-link">edit</a>
+                    <v-divider></v-divider>
+                    <a @click.prevent="deleteMessage(message)" href="#" class="card-link"><v-icon color=red>mdi-delete</v-icon></a>
+                    <a @click.prevent="editMessage(message)" href="#" class="card-link"><v-icon color=orange>mdi-pencil</v-icon></a>
                   </div>
                   <div v-else>
-                    <a @click.prevent="cancelEditing" href="#" class="card-link">cancel</a>
-                    <a @click.prevent="updateMessage" href="#" class="card-link">update</a>
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <!-- New Message -->
-              <form v-if="!editingMessage" @submit.prevent="storeMessage">
-                <div class="form-group">
-                  <label>Message:</label>
-                  <textarea v-model="messageText" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                  <label>Nickname:</label>
-                  <input v-model="nickname" class="form-control"/>
-                </div>
-                <button class="btn btn-primary">Send</button>
-              </form>
 
-              <hr>
+                    <a @click.prevent="cancelEditing" href="#" class="card-link"><v-icon color=red>mdi-cancel</v-icon></a>
+                    <a @click.prevent="updateMessage" href="#" class="card-link"><v-icon color=green>mdi-pencil</v-icon></a>
+                  </div>
+                </v-card>
+              </div>
+
               <!-- New Message -->
+            <v-card hover  class="m-tb-20 pl-3 pr-3">
+              <form  v-if="!editingMessage" @submit.prevent="storeMessage">
+                <div class="form-group">
+                  <h4>Chat App</h4>
+                  <v-textarea label="Message" v-model="messageText" class="form-control"></v-textarea>
+                </div>
+                <div class="form-group">
+                  <v-text-field label="Nickname" type="input" v-model="nickname" class="form-control">
+                  </v-text-field>
+                </div>
+                <v-btn type="submit" class="m-tb-20 btn btn-primary"><v-icon color=primary>mdi-send</v-icon></v-btn>
+              </form>
+            </v-card>
+
+              <!-- New Message -->
+              <v-card hover class="m-tb-20 pl-3 pr-3">
               <form v-if="!editingMessage" @submit.prevent="storeMessage">
                 <div class="form-group">
-                  <label>Message:</label>
-                  <textarea v-model="messageText" class="form-control"></textarea>
+                  <h4>Chat App</h4>
+                  <v-textarea label="Message" v-model="messageText" class="form-control"></v-textarea>
                 </div>
                 <div class="form-group">
-                  <label>Nickname:</label>
-                  <input v-model="nickname" class="form-control"/>
+                  <v-text-field label="Nickname" type="input" v-model="nickname" class="form-control">
+                  </v-text-field>
                 </div>
-                <button class="btn btn-primary">Send</button>
+                <v-btn type="submit" class="m-tb-20 btn btn-primary"><v-icon color=primary>mdi-send</v-icon></v-btn>
               </form>
+            </v-card>
             </div>
         </div>
     </v-dialog>
@@ -94,6 +100,7 @@ console.log(firebase.database());
 
 let db = firebase.database();
 let messagesRef = db.ref('support-chat');
+db.ref('support-chat').on('value', snapshot => console.log(snapshot.val()));
 
 
 export default {
