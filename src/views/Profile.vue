@@ -88,34 +88,34 @@ display: inline-grid;
              <v-divider class="m-tb-20"></v-divider>
 
             <form  @submit.prevent="updateProfile">
-              <h4>Update Profile</h4>
+              <h4><v-icon> mdi-account </v-icon>Update Profile</h4>
               <br>
               <div class="update-profile-inputs">
               <input  class="form-control" v-model="displayName" placeholder="your name"><br>
               <input class="form-control" v-model="photoURL" placeholder="your photo url">
+              <v-btn depressed small color="primary" @keyup.enter="updateProfile" class="update right-btn"><v-icon> mdi-send </v-icon> </v-btn>
               </div>
-              <v-btn depressed small color="primary" @keyup.enter="updateProfile" class="update right-btn"> update </v-btn>
-            </form>
+              </form>
 
             <form  @submit.prevent="updateEmail">
-              <h4>Update email</h4>
+              <h4><v-icon> mdi-email </v-icon>Update email</h4>
               <br>
               <input type="email" class="form-control" v-model="email" placeholder="enter new email">
-              <v-btn depressed small color="primary" @keyup.enter="updateEmail" class="update"> update </v-btn>
+              <v-btn depressed small color="primary" @keyup.enter="updateEmail" class="update"> <v-icon> mdi-send </v-icon></v-btn>
             </form>
 
             <form  @submit.prevent="updatePassword">
-              <h4>Update password</h4>
+              <h4><v-icon> mdi-lock </v-icon>Update password</h4>
               <br>
               <input type="password" class="form-control" v-model="newPassword" placeholder="enter new password">
-              <v-btn depressed small color="primary" @keyup.enter="updatePassword" class="update"> update </v-btn>
+              <v-btn depressed small color="primary" @keyup.enter="updatePassword" class="update"><v-icon> mdi-send </v-icon></v-btn>
             </form>
 
             <form  @submit.prevent="updateCustomDetails">
-              <h4>Update extra details</h4>
+              <h4><v-icon> mdi-account-cowboy-hat </v-icon>Update extra details</h4>
               <br>
               <input type="text" v-model="usersDetails.favoriteFood" label="Fav language" placeholder="enter favorite programing language" class="form-control">
-              <v-btn type="submit" depressed small color="primary" @keyup.enter="updateCustomDetails" class="update"> update </v-btn>
+              <v-btn type="submit" depressed small color="primary" @keyup.enter="updateCustomDetails" class="update"> <v-icon> mdi-send </v-icon> </v-btn>
             </form>
               <v-divider class="m-tb-20"></v-divider>
             <div class="center" v-if="!linkedGoogle">
