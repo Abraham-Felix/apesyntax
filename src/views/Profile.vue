@@ -81,7 +81,7 @@ display: inline-grid;
           <v-text-field readonly v-model="uid" label="Uid">
           </v-text-field>
             <img :src="authUser.photoURL" width="150">
-            <p>What's up, {{authUser.displayName || 'my friend'}}<br> we know you like food {{authUser.favoriteFood}}</p>
+            <p>What's up, {{authUser.displayName || 'my friend'}}<br> we know you like {{authUser.favoriteFood || 'Programing'}}</p>
              <br>
              <v-icon class="authicons" color=green v-if="linkedGoogle" >mdi-google</v-icon>
              <v-icon class="authicons" color=green v-if="linkedGithub" >mdi-github</v-icon>

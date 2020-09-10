@@ -1,4 +1,4 @@
-# apesyntax
+# apesyntax - A vue.js front end app
 
 ## Project setup
 ```
@@ -22,3 +22,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Project features
+```
+- Firebase config setup ready to go! just change to your account's Api [Configuration Reference](https://firebase.google.com/docs/web/setup?authuser=0#config-object).
+- Support chat app ( in development )
+- Database setup for tutorials, contact message, support chat, users extra details bound to user.
+- Firebase auth, Github auth, Google auth. ( no passwords store to respect users privacy )
