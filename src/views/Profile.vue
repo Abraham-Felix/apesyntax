@@ -77,13 +77,14 @@ display: inline-grid;
 
 <div id="app">
     <v-container class="v-container">
-        <v-card class="center block">
+        <v-card v-if="authUser" class="center block">
           <v-text-field readonly v-model="uid" label="Uid">
           </v-text-field>
             <img :src="authUser.photoURL" width="150">
-            <p>What's up, {{authUser.displayName || 'my friend'}}  I know you like {{authUser.favoriteFood || 'food'}}</p>
+            <p>What's up, {{authUser.displayName || 'my friend'}}<br> we know you like food {{authUser.favoriteFood}}</p>
              <br>
              <v-icon class="authicons" color=green v-if="linkedGoogle" >mdi-google</v-icon>
+             <v-icon class="authicons" color=green v-if="linkedGithub" >mdi-github</v-icon>
              <v-icon class="authicons" color=green v-if="linkedPassword"> mdi-email-check</v-icon>
              <v-divider class="m-tb-20"></v-divider>
 
@@ -108,15 +109,16 @@ display: inline-grid;
               <h4><v-icon> mdi-lock </v-icon>Update password</h4>
               <br>
               <input type="password" class="form-control" v-model="newPassword" placeholder="enter new password">
-              <v-btn depressed small color="primary" @keyup.enter="updatePassword" class="update"><v-icon> mdi-send </v-icon></v-btn>
+              <v-btn type="submit" depressed small color="primary" @keyup.enter="updatePassword" class="update"><v-icon> mdi-send </v-icon></v-btn>
             </form>
 
             <form  @submit.prevent="updateCustomDetails">
-              <h4><v-icon> mdi-account-cowboy-hat </v-icon>Update extra details</h4>
+              <h4><v-icon> mdi-account-cowboy-hat </v-icon>Update extra details  </h4>
               <br>
-              <input type="text" v-model="usersDetails.favoriteFood" label="Fav language" placeholder="enter favorite programing language" class="form-control">
+              <input type="text" v-model="favoriteFood" label="Fav food" placeholder="enter favorite food" class="form-control">
               <v-btn type="submit" depressed small color="primary" @keyup.enter="updateCustomDetails" class="update"> <v-icon> mdi-send </v-icon> </v-btn>
             </form>
+
               <v-divider class="m-tb-20"></v-divider>
             <div class="center" v-if="!linkedGoogle">
               <br>
@@ -132,6 +134,20 @@ display: inline-grid;
              <v-btn class="center" @click="unlinkGoogle"><v-icon color=red>mdi-email-off</v-icon></v-btn>
             </div>
 
+            <div class="center" v-if="!linkedGithub">
+              <br>
+             <h4 class="center">Link github account</h4>
+             <br>
+             <v-btn class="center" @click="linkGithub"><v-icon>mdi-github</v-icon></v-btn>
+            </div>
+
+            <div class="center" v-if="linkedGithub">
+             <br>
+             <h4 class="center">unlink github account</h4>
+             <br>
+             <v-btn class="center" @click="unlinkGithub"><v-icon color=red>mdi-email-off</v-icon></v-btn>
+            </div>
+
         </v-card>
     </v-container>
 </div>
@@ -141,6 +157,7 @@ display: inline-grid;
 <script>
 import firebase from '../plugins/firebase'
 import toastr from 'toastr';
+import vue from 'vue';
 
 let db = firebase.database();
 let messagesRef = db.ref('tutorials');
@@ -158,13 +175,14 @@ export default {
             newPassword: '',
             providerData: '',
             authUser: '',
-            usersDetails: {
-              favoriteFood: '',
-              userID:'',
-            },
+            favoriteFood: null,
+            userID: null,
         }
     },
     computed:{
+      linkedGithub () {
+        return !!this.authUser.providerData.find(provider => provider.providerId === 'github.com')
+      },
       linkedGoogle () {
         return !!this.authUser.providerData.find(provider => provider.providerId === 'google.com')
       },
@@ -183,26 +201,36 @@ export default {
         this.authUser.updateEmail(this.email)
         toastr.success('Cool! email updated')
       },
-      updateCustomDetails: function() {
+      updateCustomDetails() {
 
-        usersRef.push(this.usersDetails);
-        this.usersDetails.favoriteFood= '';
-        this.usersDetails.userID= '' ;
-        toastr.success('Nice! extra details updated');
+        firebase.database().ref('users').child(this.authUser.uid)
+          .update({favoriteFood: this.favoriteFood})
+
       },
       updatePassword() {
         this.authUser.updatePassword(this.newPassword)
-        .then(() => { this.newPassword = null })
+        .then(() => {
+          this.newPassword = null;
+          toastr.success('nice! password updated') })
         .catch(err =>
-            alert('Oops.' + err.message))
-            toastr.success('Wow! password updated')
+          toastr.error('Yikes! '+ err.message))
       },
       linkGoogle: function(){
         const provider = new firebase.auth.GoogleAuthProvider()
         this.authUser.linkWithPopup(provider)
+          toastr.success('nice! google account  linked')
+          .catch(err =>
+            toastr.error('Yikes! '+ err.message))
       },
       unlinkGoogle: function(){
         this.authUser.unlink('google.com')
+      },
+      linkGithub: function(){
+        const provider = new firebase.auth.GithubAuthProvider()
+        this.authUser.linkWithPopup(provider)
+      },
+      unlinkGithub: function(){
+        this.authUser.unlink('github.com')
       },
     },
     created: function() {
@@ -214,7 +242,7 @@ export default {
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
         }
-          this.usersDetails.userID= uid;
+          this.userID= uid;
         data => console.log(data.user, data.credential.accessToken)
         firebase.auth().onAuthStateChanged(user => {
             this.authUser = user
@@ -224,6 +252,12 @@ export default {
                 this.email = user.email
                 this.uid = user.uid
                 this.providerData = user.providerData
+                usersRef.child(user.uid).once('value', snapshot => {
+                  if (snapshot.val()) {
+                  this.favoriteFood = snapshot.val().favoriteFood
+                  vue.set(this.authUser, 'favoriteFood', this.favoriteFood)
+                   }
+                })
 
             }
         })

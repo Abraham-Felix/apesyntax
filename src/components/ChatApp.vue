@@ -94,13 +94,15 @@
 import nativeToast from 'native-toast'
 import firebase from '../plugins/firebase'
 
-
-console.log(firebase.name);
-console.log(firebase.database());
+//puts app name
+//console.log(firebase.name);
+//puts db reference
+//console.log(firebase.database());
 
 let db = firebase.database();
 let messagesRef = db.ref('support-chat');
-db.ref('support-chat').on('value', snapshot => console.log(snapshot.val()));
+//line beneath gets us a console log of our db ref value to analize
+db.ref('support-chat')/*,.on('value' snapshot => console.log(snapshot.val()));*/
 
 
 export default {

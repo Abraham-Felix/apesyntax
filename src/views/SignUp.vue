@@ -17,10 +17,13 @@
      <v-btn depressed small color="primary" @click="register">sign up</v-btn>
    <p>or go back to <router-link to="/login">login</router-link>.</p>
   </form>
-  <div>
-  <h5>Sign in with Google</h5>
+  <div class="oneH">
+  <div class="grid-50">
+  <h5>Sign in with</h5>
   <v-btn @click="signInWithGoogle"><v-icon>mdi-google</v-icon></v-btn>
- </div>
+ <v-btn @click="signInWithGithub"><v-icon>mdi-github</v-icon></v-btn>
+</div>
+</div>
 </v-card>
   </body>
 </template>
@@ -36,7 +39,7 @@ import toastr from 'toastr';
       return {
         email: '',
         password: '',
-        authUser: null
+        authUser: null,
       }
     },
     methods: {
@@ -55,13 +58,16 @@ import toastr from 'toastr';
       firebase.auth().signInWithPopup(provider)
       .then(
         data => console.log(data.user, data.credential.accessToken)
-      )
+      ).catch(err =>
+        toastr.error('Yikes '+ err.message))
     },
-    updateProfile() {
-      this.authUser.updateProfile({
-        displayName: this.displayName ,
-        photoURL: this.photoURL
-      }); toastr.success('Nice! profile updated')
+    signInWithGithub: function(){
+      const provider = new firebase.auth.GithubAuthProvider()
+      firebase.auth().signInWithPopup(provider)
+      .then(
+        data => console.log(data.user, data.credential.accessToken)
+      ).catch(err =>
+        toastr.error('Yikes '+ err.message))
     },
   },
   created () {

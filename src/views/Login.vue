@@ -1,4 +1,8 @@
 <style scoped>
+.oneH {
+width:100%;
+display:grid;
+}
 
 .v-card {
     margin: 10vw;
@@ -39,10 +43,13 @@ h5 {
             <p>Or you can
                 <router-link to="/sign-up">create one.</router-link>
             </p>
-            <div>
-            <h5>Sign in with Google</h5>
+            <div class="oneH">
+            <div class="grid-50">
+            <h5>Sign in with</h5>
             <v-btn @click="signInWithGoogle"><v-icon>mdi-google</v-icon></v-btn>
-           </div>
+           <v-btn @click="signInWithGithub"><v-icon>mdi-github</v-icon></v-btn>
+          </div>
+          </div>
 
         </div>
     </v-card>
@@ -53,6 +60,7 @@ h5 {
 <script>
 
 import firebase from 'firebase';
+import toastr from 'toastr';
 
 export default {
     name: 'login',
@@ -84,7 +92,19 @@ export default {
               }
           )
         },
-
+        signInWithGithub: function(){
+          const provider = new firebase.auth.GithubAuthProvider()
+          firebase.auth().signInWithPopup(provider)
+          .then(
+              (user) => {
+                  this.$router.go('home' + user.message + this.created || true)
+                }
+          )
+          .catch (err =>
+            toastr.error('Yikes! '+ err.message))
+          .catch (
+            toastr.success('Well done +'))
+        },
     }
 }
 
