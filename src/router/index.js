@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from '../plugins/firebase'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -79,9 +79,8 @@ const router = new VueRouter({
 
       if (requiresAuth && !currentUser) next('login');
       else if (!requiresAuth && currentUser) next('profile')
-      else next(firebase.auth().onAuthStateChanged(user => {
-        this.authUser = user}));
+      next(firebase.auth().onAuthStateChanged(currentUser => {
+          currentUser}));
     });
-
 
 export default router;

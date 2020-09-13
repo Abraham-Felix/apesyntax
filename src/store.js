@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
@@ -24,6 +23,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+
     fetchUser({ commit }, user) {
       commit("SET_LOGGED_IN", user !== null);
       if (user) {

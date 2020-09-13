@@ -1,6 +1,6 @@
 // modules
 import Vue from 'vue'
-import firebase from 'firebase'
+import firebase from './plugins/firebase'
 import VueResorce from 'vue-resource'
 import './plugins/axios'
 import vuetify from './plugins/vuetify';
