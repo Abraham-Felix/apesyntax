@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <ChatApp/>
+   <ChatApp/> 
 <v-card
    class="mx-auto"
    max-width="344"

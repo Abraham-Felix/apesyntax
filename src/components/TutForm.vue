@@ -44,7 +44,7 @@ img.preview {
                 <v-divider class="m-tb-20"></v-divider>
                 <h4>Author details</h4>
                 <div class="form-group">
-                    <v-text-field @click="loadUid"  :rules="nameRules" required label="First Name" type="text" id="tutorialFirst" class="form-control" v-model="newTutorial.first">
+                    <v-text-field :rules="nameRules" required label="First Name" type="text" id="tutorialFirst" class="form-control" v-model="newTutorial.first">
                     </v-text-field>
                 </div>
                 <div class="form-group">
@@ -98,8 +98,6 @@ img.preview {
                     <v-text-field  required label="Tutorial Sample Code Link" type="url" id="tutorialCode" class="form-control" v-model="newTutorial.code">
                     </v-text-field>
                 </div>
-                <v-text-field label="User ID" readonly required value="uid" type="text" v-model="newTutorial.userID">
-                </v-text-field>
 
               <div>
 
@@ -136,35 +134,17 @@ img.preview {
 
 <script>
 
-import Firebase from 'firebase';
+import firebase from '../plugins/firebase'
 
 import toastr from 'toastr';
 
+// to debug multiple Fire apps
+//if (!firebase.apps.length) {
+//    firebase.initializeApp(config);
+//    this.newTutorial.userID= uid;
+//}
 
-var user = Firebase.auth().currentUser;
-var uid;
-if (user != null) {
-  uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-                   // this value to authenticate with your backend server, if
-                   // you have one. Use User.getToken() instead.
-}
-
-let config = {
-    apiKey: "AIzaSyAt7e2pEhvHg9ea5qpG7pOReSh_xFnAYOI",
-    authDomain: "apesyntax.firebaseapp.com",
-    databaseURL: "https://apesyntax.firebaseio.com",
-    projectId: "apesyntax",
-    storageBucket: "apesyntax.appspot.com",
-    messagingSenderId: "970915545e858",
-    appId: "1:970915545858:web:e9b093968d646dc8e0781b",
-    measurementId: "G-15YM4ZEF9V"
-};
-if (!Firebase.apps.length) {
-    Firebase.initializeApp(config);
-    this.newTutorial.userID= uid;
-}
-
-let db = Firebase.database();
+let db = firebase.database();
 
 let messagesRef = db.ref('tutorials');
 
@@ -175,7 +155,6 @@ export default {
     },
     data() {
         return {
-          uid,
             imageData:null,
             picture:null,
             uploadValue: 0,
@@ -190,7 +169,6 @@ export default {
                 title: '',
                 date: '',
                 picture:'',
-                userID: '',
                 code: '',
             },
             languages: [
@@ -215,16 +193,6 @@ export default {
     },
 
     methods: {
-      loadUid(){
-        var user = Firebase.auth().currentUser;
-        var uid;
-        if (user != null) {
-          uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-                           // this value to authenticate with your backend server, if
-                           // you have one. Use User.getToken() instead.
-        }
-        this.newTutorial.userID= uid;
-      },
         previewImage(event){
             this.uploadValue=0;
             this.picture=null;
@@ -232,7 +200,7 @@ export default {
         },
         onUpload() {
           this.picture=null;
-          const storageRef=Firebase.storage().ref(`tutorials/images/${this.imageData.name}`).put(this.imageData);
+          const storageRef=firebase.storage().ref(`tutorials/images/${this.imageData.name}`).put(this.imageData);
           storageRef.on(`state_changed`, snapshot=>{
             this.uploadValue=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
           }, error=>{console.log(error.message)},
@@ -240,14 +208,13 @@ export default {
           storageRef.snapshot.ref.getDownloadURL().then((url)=>{
             this.picture=url;
             this.newTutorial.picture = url;
-            this.newTutorial.userID= uid;
             console.log(this.picture);
             toastr.success('Image Uploaded successfully');
           })}
         )
         },
         addTutorial: function() {
-            messagesRef.push(this.newTutorial);
+            messagesRef.child(this.newTutorial.userID).push(this.newTutorial);
             this.newTutorial.first = '';
             this.newTutorial.last = '';
             this.newTutorial.content = '';
@@ -256,7 +223,6 @@ export default {
             this.newTutorial.title = '';
             this.newTutorial.date = '',
             this.newTutorial.picture= '',
-            this.newTutorial.userID= '',
             this.newTutorial.code= '',
             toastr.success('Horray! message sent successfully');
             this.displayText = 'Nice job!';
@@ -269,7 +235,17 @@ export default {
             this.displayText = 'hum.. somthing still missing';
         }
     },
-
+    // this functions trow in uid from user in data valu to {uid}
+    created: function(){
+      var user = firebase.auth().currentUser;
+      var uid;
+      if (user != null) {
+        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                         // this value to authenticate with your backend server, if
+                         // you have one. Use User.getToken() instead.
+      }
+      this.newTutorial.userID = uid;
+    }
 }
 
 </script>

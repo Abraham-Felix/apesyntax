@@ -70,7 +70,7 @@
               </form>
             </v-card>
 
-              <!-- New Message -->
+              <!-- New Message
               <v-card hover class="m-tb-20 pl-3 pr-3">
               <form v-if="!editingMessage" @submit.prevent="storeMessage">
                 <div class="form-group">
@@ -83,7 +83,7 @@
                 </div>
                 <v-btn type="submit" class="m-tb-20 btn btn-primary"><v-icon color=primary>mdi-send</v-icon></v-btn>
               </form>
-            </v-card>
+            </v-card> -->
             </div>
         </div>
     </v-dialog>
@@ -112,7 +112,7 @@ export default {
             dialog: false, // this for modal
             messages: [],
             messageText: '',
-            nickname: 'hootlex',
+            nickname: 'Apesyntax',
             editingMessage: null
         }
     },

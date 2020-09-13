@@ -94,7 +94,7 @@ display: inline-grid;
               <div class="update-profile-inputs">
               <input  class="form-control" v-model="displayName" placeholder="your name"><br>
               <input class="form-control" v-model="photoURL" placeholder="your photo url">
-              <v-btn depressed small color="primary" @keyup.enter="updateProfile" class="update right-btn"><v-icon> mdi-send </v-icon> </v-btn>
+              <v-btn type="submit" depressed small color="primary" @keyup.enter="updateProfile" class="update right-btn"><v-icon> mdi-send </v-icon> </v-btn>
               </div>
               </form>
 
@@ -102,7 +102,7 @@ display: inline-grid;
               <h4><v-icon> mdi-email </v-icon>Update email</h4>
               <br>
               <input type="email" class="form-control" v-model="email" placeholder="enter new email">
-              <v-btn depressed small color="primary" @keyup.enter="updateEmail" class="update"> <v-icon> mdi-send </v-icon></v-btn>
+              <v-btn type="submit" depressed small color="primary" @keyup.enter="updateEmail" class="update"> <v-icon> mdi-send </v-icon></v-btn>
             </form>
 
             <form  @submit.prevent="updatePassword">

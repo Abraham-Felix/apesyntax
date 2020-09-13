@@ -29,3 +29,4 @@ see [Firebase Configuration Reference](https://firebase.google.com/docs/web/setu
 - Support chat app ( in development )
 - Database setup for tutorials, contact message, support chat, users extra details bound to user.
 - Firebase auth, Github auth, Google auth. ( no passwords store to respect users privacy )
+- Mdi Icon library

@@ -4,7 +4,7 @@
 <!-- it might need more height in body as content so it works properly -->
 <v-parallax
     height="100%"
-    src="https://firebasestorage.googleapis.com/v0/b/apesyntax.appspot.com/o/design%2Fgraphics%2FApe-back.png?alt=media&token=85245af7-8073-4a2d-8d5a-b4cb46890735"
+
   >
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -131,8 +131,7 @@
 </template>
 <script>
 import firebase from 'firebase'
-import { mapGetters } from "vuex";
-
+import { mapGetters } from "vuex"
 
 export default {
   name: 'App',
