@@ -1,46 +1,17 @@
 <style>
-.preview{
-  height:auto;
-  width:200px;
-  transition:1.5s;
-  border-radius:5px;
-}
-.preview:hover{
-  height:auto;
-  width:400px;
-}
-.data-rw{
-  display:inline-flex;
-}
-.dt-corner {
-    position: absolute;
-    display: -webkit-box;
-    z-index: 1;
-    margin-top: -74px;
-}
-p{
-  margin-bottom: 0px !important;
-}
-.v-card{
-  margin-top:10px;
-  margin-bottom:10px;
-}
-.v-icon{
-  margin-left:10px;
-  margin-right:10px;
-}
 .content {
   text-align: justify;
 padding: 20px;
 }
 </style>
 <template>
-  <v-container id="tutorials">
+  <v-container id="my-tutorials">
     <v-card>
-      <h1>All Tutorials</h1>
-      </v-card>
-           <!-- loop over the tutorials -->
-           <div v-for="tutorial in allTutorials" :key="tutorial._key">
+      <h1>My Tutorials</h1>
+    </v-card>
+
+      <!-- loop over the tutorials -->
+      <div v-for="(tutorial, key) in authUser.myTutorial" :key="key">
         <v-card>
              <br>
              <h3>{{ tutorial.title}}</h3><br>
@@ -61,38 +32,47 @@ padding: 20px;
              <p> {{ tutorial.language  }} </p><br>
            <!-- and so on -->
         </v-card>
-     </div>
-     <br>
+      </div>
 
   </v-container>
 </template>
+
 <script>
+
 import firebase from '../plugins/firebase'
+import vue from 'vue'
 
 let db = firebase.database();
 //let usersRef = db.ref('users');
 let tutRef = db.ref('tutorials');
 
 export default {
-  name: 'TutShow',
-  data: () => ({
-  authUser: null,
-  allTutorials: [] // initialise an array
-}),
+  name: 'TutShowMyTuts',
+  data() {
+      return {
+          authUser: {},
+          favoriteFood: null,
+          myTutorial: null
+      }
+  },
   methods: {
   },
   created: function() {
     data => console.log(data.user, data.credential.accessToken)
     firebase.auth().onAuthStateChanged(user => {
+        this.authUser = user
         if (user) {
-          tutRef.once('value', snapshot => {
-            const val = snapshot.val()
-            if (val) {
-              this.allTutorials = Object.values(val).flatMap(tutes =>
-              Object.entries(tutes).map(([ _key, tutorial ]) => ({ _key, ...tutorial})))
-            }
-            console.log(snapshot.val())
-
+          //usersRef.child(user.uid).once('value', snapshot => {
+          //  if (snapshot.val()) {
+          //  this.favoriteFood = snapshot.val().favoriteFood
+        //    vue.set(this.authUser, 'favoriteFood', this.favoriteFood)
+        //     }
+        //  })
+          tutRef.child(user.uid).once('value', snapshot => {
+            if (snapshot.val()) {
+            this.myTutorial = snapshot.val()
+            vue.set(this.authUser, 'myTutorial', this.myTutorial )
+             }
           });
         }
 

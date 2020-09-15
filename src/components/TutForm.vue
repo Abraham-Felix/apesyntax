@@ -165,7 +165,7 @@ export default {
                 content: '',
                 email: '',
                 last: '',
-                language: '',
+                language: [],
                 title: '',
                 date: '',
                 picture:'',

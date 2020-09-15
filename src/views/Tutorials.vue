@@ -8,8 +8,13 @@
 </style>
 <template>
 <body>
-<div class="m-tb-20">
+<div>
+  <v-card
+     class="m-tb-20 tutshow"
+     max-width="344">
 <TutForm/>
+<TutShowMyTuts/>
+</v-card>
   </div>
   <div>
 <v-card
@@ -25,12 +30,13 @@
 
 import TutForm from '../components/TutForm.vue';
 import TutShow from '../components/TutShow.vue';
-
+import TutShowMyTuts from '../components/TutShowMyTuts.vue';
 export default {
   name: 'tutorials',
   components: {
     TutForm,
     TutShow,
+    TutShowMyTuts,
   }
 }
 
