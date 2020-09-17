@@ -94,6 +94,9 @@ img.preview {
                       <v-btn :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
                       <v-icon class="mdi mdi-format-bold mdi-24px"> </v-icon>
                     </v-btn>
+                    <v-btn :class="{ 'is-active': isActive.strike() }" @click="commands.strike">
+                          <v-icon class="mdi mdi-format-strikethrough mdi-24px " />
+                        </v-btn>
                       <v-btn :class="{ 'is-active': isActive.italic() }" @click="commands.italic">
                         <v-icon class="mdi mdi-format-italic mdi-24px "> </v-icon>
                       </v-btn>
@@ -103,9 +106,7 @@ img.preview {
                       <v-btn :class="{ 'is-active': isActive.code() }" @click="commands.code">
                         <v-icon class="mdi mdi-code-tags mdi-24px "> </v-icon>
                       </v-btn>
-                      <v-btn :class="{ 'is-active': isActive.link() }" @click="commands.link">
-                        <v-icon class="mdi mdi-link mdi-24px"> </v-icon>
-                      </v-btn>
+
 
                       <v-divider></v-divider>
                     </div>
