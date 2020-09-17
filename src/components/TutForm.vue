@@ -86,10 +86,33 @@ img.preview {
                     <v-text-field :rules="titleRules" required label="Tutorial Title" type="text" id="tutorialTitle" class="form-control" v-model="newTutorial.title">
                     </v-text-field>
                 </div>
-                <div class="form-group">
-                    <v-textarea :rules="contentRules" required label="Tutorial content" type="text" id="tutorialContent" class="form-control" v-model="newTutorial.content">
-                    </v-textarea>
-                </div>
+  <!--tiptap-->   <v-card >
+                  <div >
+                    <editor-menu-bar v-on:submit.prevent="addTutorial" :editor="editor" v-slot="{ commands, isActive }">
+                      <div>
+                      <v-btn :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
+                      <v-icon class="mdi mdi-format-bold mdi-24px"> </v-icon>
+                    </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.italic() }" @click="commands.italic">
+                        <v-icon class="mdi mdi-format-italic mdi-24px "> </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.underline() }" @click="commands.underline">
+                        <v-icon class="mdi mdi-format-underline mdi-24px "> </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.code() }" @click="commands.code">
+                        <v-icon class="mdi mdi-code-tags mdi-24px "> </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.link() }" @click="commands.link">
+                        <v-icon class="mdi mdi-link mdi-24px"> </v-icon>
+                      </v-btn>
+
+                      <v-divider></v-divider>
+                    </div>
+                    </editor-menu-bar>
+                    <editor-content  label="Tutorial content"  :editor="editor" v-model="newTutorial.content" />
+                  </div>
+                  </v-card>
+
                 <div class="form-group">
                     <v-text-field required label="Date" class="form-control" type='date' v-model='newTutorial.date'>
                     </v-text-field>
@@ -111,8 +134,7 @@ img.preview {
                     <v-card-title class="center">{{ newTutorial.title }} </v-card-title>
                     <v-card-subtitle> {{ newTutorial.first }} {{ newTutorial.last }} </v-card-subtitle>
                     <v-divider class="m-tb-20"></v-divider>
-                    <v-card-text>{{ newTutorial.content }}</v-card-text>
-
+                    <v-card-text v-html="newTutorial.content">{{ newTutorial.content }}</v-card-text>
                     <v-card-text>
                         <h5>{{ newTutorial.language }}</h5>
                         <h5>{{ newTutorial.email }}</h5>
@@ -135,26 +157,68 @@ img.preview {
 <script>
 
 import firebase from '../plugins/firebase'
-
+import EditorContent from "../components/EditorContent";
 import toastr from 'toastr';
-
 // to debug multiple Fire apps
 //if (!firebase.apps.length) {
 //    firebase.initializeApp(config);
 //    this.newTutorial.userID= uid;
 //}
+import { Editor,  EditorMenuBar } from 'tiptap'
+import {
+  Blockquote,
+  CodeBlock,
+  HardBreak,
+  Heading,
+  OrderedList,
+  BulletList,
+  ListItem,
+  TodoItem,
+  TodoList,
+  Bold,
+  Code,
+  Italic,
+  Link,
+  Strike,
+  Underline,
+  History,
+} from 'tiptap-extensions'
 
 let db = firebase.database();
 
 let messagesRef = db.ref('tutorials');
-
 export default {
     name: 'tutform',
     firebase: {
         tutorials: messagesRef
     },
+    components: {
+      EditorMenuBar,
+      EditorContent,
+    },
     data() {
         return {
+          editor: new Editor({
+            extensions: [
+              new Blockquote(),
+              new CodeBlock(),
+              new HardBreak(),
+              new Heading({ levels: [1, 2, 3] }),
+              new BulletList(),
+              new OrderedList(),
+              new ListItem(),
+              new TodoItem(),
+              new TodoList(),
+              new Bold(),
+              new Code(),
+              new Italic(),
+              new Link(),
+              new Strike(),
+              new Underline(),
+              new History(),
+            ],
+            content: '',
+            }),
             imageData:null,
             picture:null,
             uploadValue: 0,
@@ -162,11 +226,11 @@ export default {
             displayText: 'Push me!',
             newTutorial: {
                 first: '',
-                content: '',
                 email: '',
                 last: '',
                 language: [],
                 title: '',
+                content: '',
                 date: '',
                 picture:'',
                 code: '',
@@ -245,6 +309,9 @@ export default {
                          // you have one. Use User.getToken() instead.
       }
       this.newTutorial.userID = uid;
+    },
+    beforeDestroy() {
+      this.editor.destroy()
     }
 }
 

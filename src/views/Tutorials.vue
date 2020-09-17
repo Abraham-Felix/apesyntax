@@ -31,6 +31,7 @@
 import TutForm from '../components/TutForm.vue';
 import TutShow from '../components/TutShow.vue';
 import TutShowMyTuts from '../components/TutShowMyTuts.vue';
+
 export default {
   name: 'tutorials',
   components: {

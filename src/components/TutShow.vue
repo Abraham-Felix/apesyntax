@@ -48,7 +48,7 @@ padding: 20px;
                <v-icon> mdi-calendar </v-icon>
                <p> {{ tutorial.date  }} </p><br>
              </div>
-             <p class="content"> {{ tutorial.content}}</p><br>
+             <p class="content" v-html="tutorial.content"> {{ tutorial.content}}</p><br>
              <br>
              <img class="preview" :src="tutorial.picture"><br>
              <div class="data-rw"><v-icon>mdi-account-tie</v-icon>
