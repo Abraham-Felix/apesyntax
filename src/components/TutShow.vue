@@ -1,4 +1,5 @@
 <style scoped>
+
 .preview{
   height:auto;
   width:200px;

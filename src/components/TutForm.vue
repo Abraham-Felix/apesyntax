@@ -7,6 +7,7 @@ img.preview {
     min-width: 50px !important;
 }
 
+
 </style>
 
 <template>
@@ -230,7 +231,7 @@ export default {
                 last: '',
                 language: [],
                 title: '',
-                content: '',
+                content: '<br>Enter content here<br>',
                 date: '',
                 picture:'',
                 code: '',
