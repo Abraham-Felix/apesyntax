@@ -44,7 +44,8 @@ h1 {
             <p> I am trying to develop something that will help programers learning experience, keep engaging with current knowledge as live data and a place to store tutorials for research.</p>
             <h5>About the App:</h5>
             <br>
-            <p> The tool will grow along the way with the data flow, so expect new changes often and new ideas. so <span class="bold">hang</span> on tight this could be quite a journey! </p>
+            <p> - Upcoming text editor! </p>
+            <br>
             <h5>Languages Used:</h5><br>
             <h5> Html, Css, Sass, Js, Vue.js, Firebase, Webpack </h5>
 

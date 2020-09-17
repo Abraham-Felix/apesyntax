@@ -1,11 +1,47 @@
-<style>
+<style scoped>
+img.preview {
+  width:200px;
+}
 .content {
   text-align: justify;
 padding: 20px;
 }
+.v-card{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.v-btn {
+    height: 50px !important;
+    min-width: 50px !important;
+}
+
 </style>
 <template>
-  <v-container id="my-tutorials">
+
+    <v-dialog v-model="dialog" width="500">
+        <template  v-slot:activator="{ on, attrs }">
+            <v-btn style="z-index:9;" color="blue lighten-1" dark rounded v-bind="attrs" v-on="on" fixed right>
+              <v-tooltip right >
+                  <template  v-slot:activator="{ on, attrs }">
+              <v-icon fab dark v-bind="attrs" v-on="on">
+                  mdi-eye
+              </v-icon>
+            </template>
+            <img class="monk-ico" src="https://celfonica.s3-us-west-1.amazonaws.com/logos/monk-circle+50px.png">
+            <span style="display:inline;">
+              View your tutorials
+            </span>
+        </v-tooltip>
+            </v-btn>
+            </template>
+            <div class="left">
+                <v-btn style="z-index:9; height: 20px !important; margin-top: -30px; margin-left: -10px;" color="primary" @click="dialog = false" width="5px">
+                    <v-icon>
+                        mdi-close
+                    </v-icon>
+                </v-btn>
+            </div>
+            <v-container id="my-tutorials">
     <v-card>
       <h1>My Tutorials</h1>
     </v-card>
@@ -33,8 +69,8 @@ padding: 20px;
            <!-- and so on -->
         </v-card>
       </div>
-
-  </v-container>
+    </v-container>
+</v-dialog>
 </template>
 
 <script>
@@ -52,7 +88,8 @@ export default {
       return {
           authUser: {},
           favoriteFood: null,
-          myTutorial: null
+          myTutorial: null,
+          dialog: false,
       }
   },
   methods: {
