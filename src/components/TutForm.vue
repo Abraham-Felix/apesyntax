@@ -6,7 +6,9 @@ img.preview {
     height: 50px !important;
     min-width: 50px !important;
 }
-
+.txt-e-btn {
+  padding: 0px !important;
+}
 
 </style>
 
@@ -92,20 +94,51 @@ img.preview {
                     <editor-menu-bar v-on:submit.prevent="addTutorial" :editor="editor" v-slot="{ commands, isActive }">
                       <div>
                       <v-btn :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
-                      <v-icon class="mdi mdi-format-bold mdi-24px"> </v-icon>
+                      <v-icon class="txt-e-btn mdi mdi-format-bold mdi-24px"> </v-icon>
                     </v-btn>
                     <v-btn :class="{ 'is-active': isActive.strike() }" @click="commands.strike">
-                          <v-icon class="mdi mdi-format-strikethrough mdi-24px " />
+                          <v-icon class="txt-e-btn mdi mdi-format-strikethrough mdi-24px " />
                         </v-btn>
                       <v-btn :class="{ 'is-active': isActive.italic() }" @click="commands.italic">
-                        <v-icon class="mdi mdi-format-italic mdi-24px "> </v-icon>
+                        <v-icon class="txt-e-btn mdi mdi-format-italic mdi-24px "> </v-icon>
                       </v-btn>
                       <v-btn :class="{ 'is-active': isActive.underline() }" @click="commands.underline">
-                        <v-icon class="mdi mdi-format-underline mdi-24px "> </v-icon>
+                        <v-icon class="txt-e-btn mdi mdi-format-underline mdi-24px "> </v-icon>
                       </v-btn>
                       <v-btn :class="{ 'is-active': isActive.code() }" @click="commands.code">
-                        <v-icon class="mdi mdi-code-tags mdi-24px "> </v-icon>
+                        <v-icon class="txt-e-btn mdi mdi-code-tags mdi-24px "> </v-icon>
                       </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.paragraph() }" @click="commands.paragraph">
+                        <v-icon class="txt-e-btn mdi mdi-format-paragraph mdi-24px ">  </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.bullet_list() }" @click="commands.bullet_list">
+                        <v-icon class="txt-e-btn mdi mdi-format-list-bulleted mdi-24px ">  </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.ordered_list() }" @click="commands.ordered_list">
+                        <v-icon class="txt-e-btn mdi mdi-format-list-numbered mdi-24px ">  </v-icon>
+                      </v-btn>
+                      <v-btn :class="{ 'is-active': isActive.blockquote() }" @click="commands.blockquote">
+                        <v-icon class="txt-e-btn mdi mdi-code-not-equal-variant mdi-24px ">  </v-icon>
+                      </v-btn>
+                      <v-btn class="txt-e-btn" :class="{ 'is-active': isActive.heading({ level: 1 }) }" @click="commands.heading({ leve: 1 })">
+                        <v-icon > H1 </v-icon>
+                      </v-btn>
+                      <v-btn class="txt-e-btn" :class="{ 'is-active': isActive.heading({ level: 2 }) }" @click="commands.heading({ leve: 2 })">
+                        <v-icon > H2 </v-icon>
+                      </v-btn>
+                      <v-btn class="txt-e-btn" :class="{ 'is-active': isActive.heading({ level: 3 }) }" @click="commands.heading({ leve: 3 })">
+                        <v-icon > H3 </v-icon>
+                      </v-btn>
+                      <v-btn @click="commands.horizontal_rule">
+                          <v-icon class="txt-e-btn mdi mdi-minus mdi-24px"></v-icon>
+                      </v-btn>
+                      <v-btn @click="commands.undo">
+                          <v-icon class="txt-e-btn mdi mdi-undo mdi-24px"></v-icon>
+                      </v-btn>
+                      <v-btn @click="commands.redo">
+                          <v-icon class="txt-e-btn mdi mdi-redo mdi-24px"></v-icon>
+                      </v-btn>
+
 
 
                       <v-divider></v-divider>
@@ -232,7 +265,7 @@ export default {
                 last: '',
                 language: [],
                 title: '',
-                content: '<br>Enter content here<br>',
+                content: '<br>Enter content here<br>👏',
                 date: '',
                 picture:'',
                 code: '',
